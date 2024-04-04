@@ -1,4 +1,13 @@
 package com.example.dashboard.entities;
 
-public class Usuario {
+import jakarta.persistence.Entity;
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+public class Usuario extends Base{
 }

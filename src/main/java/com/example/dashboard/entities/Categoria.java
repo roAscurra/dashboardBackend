@@ -16,5 +16,5 @@ public class Categoria extends Base{
     @Column(name = "nombre")
     private String nombre;
     @ManyToMany(cascade = CascadeType.REFRESH)
-    private List<Empresa> empresas;
+    private List<Sucursal> sucursales;
 }

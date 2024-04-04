@@ -1,4 +1,13 @@
 package com.example.dashboard.entities;
 
-public class Promociones {
+import jakarta.persistence.Entity;
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+public class Promociones extends Base{
 }
