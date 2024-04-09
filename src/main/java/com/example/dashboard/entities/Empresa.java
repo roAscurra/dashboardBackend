@@ -12,10 +12,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class Empresa extends Base{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
-    private Integer id;
     @Column(name = "Denominacion", length = 128)
     private String denominacion;
     @Column(name = "Telefono", length = 50)
