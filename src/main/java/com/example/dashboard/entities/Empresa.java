@@ -12,11 +12,25 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class Empresa extends Base{
-    @Column(name = "nombre")
-    private String nombre;
-    @Column(name = "razonSocial")
-    private String razonSocial;
-    @Column(name = "cuil")
-    private int cuil;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id")
+    private Integer id;
+    @Column(name = "Denominacion", length = 128)
+    private String denominacion;
+    @Column(name = "Telefono", length = 50)
+    private String telefono;
+    @Column(name = "HorarioDeAtencion", length = 256)
+    private String horarioAtencion;
+    @Column(name = "QuienesSomos", length = 1024)
+    private String quienesSomos;
+    @Column(name = "Latitud")
+    private Double latitud;
+    @Column(name = "Longitud")
+    private Double longitud;
+    @Column(name = "Domicilio", length = 256)
+    private String domicilio;
+    @Column(name = "Email", length = 75)
+    private String email;
 
 }
