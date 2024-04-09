@@ -15,6 +15,5 @@ import java.io.Serializable;
 public class Base implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
     private Long id;
 }
