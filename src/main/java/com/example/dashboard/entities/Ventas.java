@@ -10,5 +10,5 @@ import lombok.*;
 @Builder
 @Entity
 public class Ventas extends Base{
-    
+
 }
