@@ -3,7 +3,10 @@ package com.example.dashboard.entities;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,4 +22,6 @@ public class Empresa extends Base{
     @Column(name = "cuil")
     private int cuil;
 
+    @OneToMany
+    private List<Sucursal> sucursalList;
 }
