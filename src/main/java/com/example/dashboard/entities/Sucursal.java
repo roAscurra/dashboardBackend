@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.*;
 
+import java.time.LocalTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,6 +15,8 @@ import lombok.*;
 public class Sucursal extends Base{
     @Column(name = "nombre")
     private String nombre;
-    @Column(name = "telefono")
-    private int telefono;
+    @Column(name = "horarioApertura")
+    private LocalTime horarioApertura;
+    @Column(name = "horarioCierre")
+    private LocalTime horarioCierre;
 }

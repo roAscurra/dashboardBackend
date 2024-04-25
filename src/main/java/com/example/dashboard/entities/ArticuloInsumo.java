@@ -13,14 +13,18 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class ArticuloInsumo extends Base{
-    @Column
-    private String denominacion;
-    @Column
+
+    @Column(name = "precioCompra")
     private double precioCompra;
-    @Column
-    private double precioVenta;
-    @Column
+    @Column(name = "stockActual")
+    private Integer stockActual;
+    @Column(name = "stockMaximo")
+    private Integer stockMaximo;
+    @Column(name = "esParaElaborar")
     private Boolean esParaElaborar;
+
+
+
 
     @ManyToOne
     @JoinColumn(name="unidad_medida_id")
@@ -28,7 +32,7 @@ public class ArticuloInsumo extends Base{
 
     @ManyToOne
     @JoinColumn(name="imagen_insumo_id")
-    private ImagenInsumo imagenInsumo;
+    private ImagenPromocion imagenInsumo;
 
     @ManyToOne
     @JoinColumn(name="categoria_articulo_id")

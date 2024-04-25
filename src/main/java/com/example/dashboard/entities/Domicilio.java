@@ -10,7 +10,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ArticuloManufacturadoDetalle  extends Base{
-    @Column(name = "cantidad")
-    private Integer cantidad;
+public class Domicilio extends Base{
+    @Column(name = "calle")
+    private String calle;
+    @Column(name = "numero")
+    private Integer numero;
+    @Column(name = "cp")
+    private Integer cp;
 }

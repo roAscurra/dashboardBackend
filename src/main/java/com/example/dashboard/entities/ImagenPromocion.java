@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ImagenInsumo extends Base{
-    @Column
+public class ImagenPromocion extends Base{
+    @Column(name = "denominacion")
     private String denominacion;
 }

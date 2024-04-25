@@ -10,7 +10,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ArticuloManufacturadoDetalle  extends Base{
+public class DetallePedido extends Base{
     @Column(name = "cantidad")
     private Integer cantidad;
+    @Column(name = "subTotal")
+    private Double subTotal;
 }

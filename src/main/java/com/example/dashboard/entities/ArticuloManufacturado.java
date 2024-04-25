@@ -12,21 +12,16 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SucursalInsumo extends Base {
-
-    @Column
-    private long stockActual;
-    @Column
-    private long stockMinimo;
-    @Column
-    private long stockMaximo;
+public class ArticuloManufacturado extends Base{
+    @Column(name = "descripcion")
+    private String descripcion;
+    @Column(name = "tiempoEstimadoMinutos")
+    private Integer tiempoEstimadoMinutos;
+    @Column(name = "preparacion")
+    private String preparacion;
 
     @ManyToOne
     @JoinColumn(name="articulo_insumo_id")
     private ArticuloInsumo articuloInsumo;
-
-    @ManyToOne
-    @JoinColumn(name="sucursal_id")
-    private Sucursal sucursal;
 
 }

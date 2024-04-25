@@ -13,8 +13,9 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class Categoria extends Base{
-    @Column(name = "nombre")
-    private String nombre;
+    @Column(name = "denominacion")
+    private String denominacion;
+
     @ManyToMany(cascade = CascadeType.REFRESH)
     private List<Sucursal> sucursales;
 }

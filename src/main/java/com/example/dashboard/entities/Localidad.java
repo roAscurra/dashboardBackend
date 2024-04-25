@@ -1,13 +1,16 @@
 package com.example.dashboard.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.*;
 
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
-public class Personal extends Base{
+public class Localidad extends Base{
+    @Column(name = "nombre")
+    private String nombre;
 }
