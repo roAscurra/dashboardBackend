@@ -13,11 +13,9 @@ public class ImagenPromocion extends Base{
     @Column(name = "denominacion")
     private String denominacion;
 
-    @OneToOne
-    @JoinColumn(name = "imagenPromocion")
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "fk_promocion")
     private Promocion promocion;
 
-    @OneToOne
-    @JoinColumn(name = "articulo")
-    private Articulo articulo;
 }

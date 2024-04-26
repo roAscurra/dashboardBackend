@@ -21,5 +21,7 @@ public class Empresa extends Base{
     @Column(name = "cuil")
     private int cuil;
 
+    @OneToMany(mappedBy = "empresa",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Sucursal> sucursales;
 
 }

@@ -1,6 +1,7 @@
 package com.example.dashboard.controllers;
 
 import com.example.dashboard.entities.ArticuloManufacturado;
+import com.example.dashboard.services.Base.ArticuloManufacturadoServiceImpl;
 import com.example.dashboard.services.Base.ClienteServiceImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
