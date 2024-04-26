@@ -1,10 +1,9 @@
 package com.example.dashboard.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,11 +22,9 @@ public class ArticuloInsumo extends Base{
     @Column(name = "esParaElaborar")
     private Boolean esParaElaborar;
 
+    @OneToMany(mappedBy = "articulo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Articulo> articulos;
 
-
-
-
-
-
-
+    @OneToMany(mappedBy = "articuloManufacturaDetalle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ArticuloManufacturadoDetalle> articuloManufacturadoDetalles;
 }

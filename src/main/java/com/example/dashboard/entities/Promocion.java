@@ -43,4 +43,8 @@ public class Promocion extends Base{
 
     @OneToMany(mappedBy = "promocion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ImagenPromocion> imagenPromociones;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "fk_articulo")
+    private Articulo articulo;
 }
