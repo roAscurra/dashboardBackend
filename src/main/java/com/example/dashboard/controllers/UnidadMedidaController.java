@@ -2,7 +2,10 @@ package com.example.dashboard.controllers;
 
 import com.example.dashboard.entities.ArticuloManufacturado;
 import com.example.dashboard.entities.UnidadMedida;
+<<<<<<< HEAD
+=======
 import com.example.dashboard.services.Base.ClienteServiceImpl;
+>>>>>>> ec891c0b646af286a4f33114a5648cf3cfa37c7c
 import com.example.dashboard.services.Base.UnidadMedidaServiceImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;

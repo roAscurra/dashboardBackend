@@ -1,7 +1,6 @@
 package com.example.dashboard.controllers;
 
 import com.example.dashboard.entities.Pedido;
-import com.example.dashboard.services.Base.ClienteServiceImpl;
 import com.example.dashboard.services.Base.PedidoServiceImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,4 +15,7 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
         super(service);
     }
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> ec891c0b646af286a4f33114a5648cf3cfa37c7c
