@@ -1,10 +1,7 @@
 package com.example.dashboard.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -20,5 +17,9 @@ public class DetallePedido extends Base{
     private Integer cantidad;
     @Column(name = "subTotal")
     private Double subTotal;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "fk_articulo")
+    private  Articulo articulo;
 
 }

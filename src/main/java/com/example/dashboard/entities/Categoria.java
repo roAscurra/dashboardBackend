@@ -20,7 +20,11 @@ public class Categoria extends Base{
     @Column(name = "denominacion")
     private String denominacion;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Categoria> categorias;
 
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Articulo> articulos;
 
 
 }
