@@ -1,7 +1,11 @@
 package com.example.dashboard;
 
+import com.example.dashboard.entities.Categoria;
+import com.example.dashboard.entities.DetallePedido;
 import com.example.dashboard.entities.Empresa;
 import com.example.dashboard.entities.Sucursal;
+import com.example.dashboard.repositories.CategoriaRepository;
+import com.example.dashboard.repositories.DetallePedidoRepository;
 import com.example.dashboard.repositories.EmpresaRepository;
 import com.example.dashboard.repositories.SucursalRepository;
 
@@ -28,6 +32,8 @@ public class DashboardApplication {
 
 	@Autowired
 	private SucursalRepository sucursalRepository;
+
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(DashboardApplication.class, args);
@@ -67,6 +73,33 @@ public class DashboardApplication {
 			empresaRepository.save(empresa);
 
 			logger.info("Alta de empresa y sucursales completada");
+		};
+	}
+	@Bean
+	CommandLineRunner init(EmpresaRepository empresaRepository, SucursalRepository sucursalRepository, CategoriaRepository categoriaRepository, DetallePedidoRepository detallePedidoRepository) {
+		return args -> {
+			logger.info("----------------ESTOY----FUNCIONANDO---------------------");
+
+			// Crear una instancia de Categoria
+			Categoria categoria = Categoria.builder()
+					.denominacion("Categoria 1")
+					.build();
+
+			// Guardar la categoría en la base de datos
+			categoriaRepository.save(categoria);
+
+			logger.info("Alta de categoria completada");
+
+			// Crear una instancia de DetallePedido
+			DetallePedido detallePedido = DetallePedido.builder()
+					.cantidad(5)
+					.subTotal(100.0)
+					.build();
+
+			// Guardar el detalle del pedido en la base de datos
+			detallePedidoRepository.save(detallePedido);
+
+			logger.info("Alta de detalle del pedido completada");
 		};
 	}
 
