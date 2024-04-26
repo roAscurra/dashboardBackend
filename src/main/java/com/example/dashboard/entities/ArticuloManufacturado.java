@@ -1,9 +1,6 @@
 package com.example.dashboard.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -20,8 +17,13 @@ public class ArticuloManufacturado extends Base{
     @Column(name = "preparacion")
     private String preparacion;
 
-    @ManyToOne
-    @JoinColumn(name="articulo_insumo_id")
-    private ArticuloInsumo articuloInsumo;
+    @OneToMany
+    @JoinColumn(name="articulo_manufacturado_detalle")
+    private ArticuloManufacturadoDetalle articuloManufacturadoDetalle;
+
+    @OneToMany
+    @JoinColumn(name="articulo")
+    private Articulo articulo;
+
 
 }

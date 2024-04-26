@@ -2,6 +2,7 @@ package com.example.dashboard.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -27,4 +28,9 @@ public class Factura extends Base{
     private Enum formaPago;
     @Column(name = "totalVenta")
     private Double totalVenta;
+
+    
+    @OneToOne
+    private Factura factura;
+
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,5 +29,16 @@ public class Categoria extends Base{
     @JsonBackReference
     private Sucursal sucursal;
 
+    @ManyToMany(cascade = CascadeType.REFRESH)
+    private List<Sucursal> sucursales;
+
+    @OneToMany()
+    @JoinColumn(name = "articulo_id")
+    @Builder.Default //Builder no sobreescribe la inicializacion de la lista
+    private List<Articulo> articulos = new ArrayList<>();
+
+    @OneToMany
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
 
 }
