@@ -30,4 +30,9 @@ public class Sucursal extends Base{
     inverseJoinColumns = @JoinColumn(name = "fk_promocion"))
     private List<Promocion> promociones;
 
+    @ManyToMany
+    @JoinTable(name = "sucursal_categoria",
+            joinColumns = @JoinColumn(name = "fk_sucursal"),
+            inverseJoinColumns = @JoinColumn(name = "fk_categoria"))
+    private List<Categoria> categorias;
 }
