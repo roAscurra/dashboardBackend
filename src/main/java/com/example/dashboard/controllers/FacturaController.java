@@ -16,4 +16,3 @@ public class FacturaController extends BaseControllerImpl<Factura, FacturaServic
         super(service);
     }
 }
-}

@@ -31,10 +31,14 @@ public class Pedido extends Base{
     private Domicilio domicilio;
 
     @ManyToOne
-    @JoinColumn (name="sucursal_id")
+    @JoinColumn(name="sucursal_id")
     private Sucursal sucrusal;
 
-    
+
+    @ManyToOne
+    @JoinColumn(name="cliente_id")
+    private Cliente cliente;
+
     @OneToOne
     private Factura factura;
 
