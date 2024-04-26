@@ -1,9 +1,6 @@
 package com.example.dashboard.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -16,7 +13,11 @@ public class ImagenPromocion extends Base{
     @Column(name = "denominacion")
     private String denominacion;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "imagenPromocion")
     private Promocion promocion;
+
+    @OneToOne
+    @JoinColumn(name = "articulo")
+    private Articulo articulo;
 }

@@ -22,7 +22,4 @@ public class Empresa extends Base{
     private int cuil;
 
 
-    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Sucursal> sucursales;
 }
