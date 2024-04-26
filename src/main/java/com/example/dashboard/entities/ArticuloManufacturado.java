@@ -17,13 +17,6 @@ public class ArticuloManufacturado extends Base{
     @Column(name = "preparacion")
     private String preparacion;
 
-    @OneToMany
-    @JoinColumn(name="articulo_manufacturado_detalle")
-    private ArticuloManufacturadoDetalle articuloManufacturadoDetalle;
-
-    @OneToMany
-    @JoinColumn(name="articulo")
-    private Articulo articulo;
 
 
 }

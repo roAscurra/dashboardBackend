@@ -41,11 +41,6 @@ public class Promocion extends Base{
         OTRO
     }
 
-    @ManyToMany
-    @JoinTable(
-            name = "sucursal_promocion",
-            joinColumns = @JoinColumn(name = "promocion_id"),
-            inverseJoinColumns = @JoinColumn(name = "sucursal_id")
-    )
-    private List<Sucursal> sucursales;
+    @OneToMany(mappedBy = "promocion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ImagenPromocion> imagenPromociones;
 }

@@ -3,7 +3,9 @@ package com.example.dashboard.services.Base;
 import com.example.dashboard.entities.UnidadMedida;
 import com.example.dashboard.repositories.BaseRepository;
 import com.example.dashboard.repositories.UnidadMedidaRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UnidadMedidaServiceImpl extends BaseServiceImpl<UnidadMedida, Long> implements UnidadMedidaService{
     private UnidadMedidaRepository unidadMedidaRepository;
 

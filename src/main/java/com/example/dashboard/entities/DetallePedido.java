@@ -21,11 +21,4 @@ public class DetallePedido extends Base{
     @Column(name = "subTotal")
     private Double subTotal;
 
-    @OneToMany(mappedBy = "detallePedido", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Sucursal> articulo;
-
-    @OneToMany(mappedBy = "detallePedido", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Sucursal> pedido;
 }
