@@ -11,6 +11,9 @@ public abstract class BaseControllerImpl<T extends Base, S extends BaseServiceIm
 
     protected S servicio;
 
+    public BaseControllerImpl(S servicio) {
+        this.servicio = servicio;
+    }
     @GetMapping("")
     public ResponseEntity<?> getAll() {
         try {

@@ -30,4 +30,6 @@ public class Promocion extends Base{
     private Double precioPromocional;
     @Column(name = "tipoPromocion")
     private Enum tipoPromocion;
+
+
 }

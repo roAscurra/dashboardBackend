@@ -1,9 +1,6 @@
 package com.example.dashboard.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -22,6 +19,7 @@ public class Empresa extends Base{
     @Column(name = "cuil")
     private int cuil;
 
-    @OneToMany
-    private List<Sucursal> sucursalList;
+    @OneToMany(mappedBy = "empresa")
+
+    private List<Sucursal> sucursales;
 }
