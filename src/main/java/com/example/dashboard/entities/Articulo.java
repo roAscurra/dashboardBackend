@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -13,11 +15,14 @@ import lombok.*;
 @MappedSuperclass
 public class Articulo extends Base{
     @Column(name = "denominacion")
-    private String denominacion;
+    protected String denominacion;
     @Column(name = "precioVenta")
-    private Double precioVenta;
+    protected Double precioVenta;
 
-    @OneToOne
-    @JoinColumn(name = "articuloInsumo")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "fk_articuloInsumo")
     private ArticuloInsumo articuloInsumo;
+
+    @OneToMany(mappedBy = "promocion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ImagenPromocion> imagenPromociones;
 }
