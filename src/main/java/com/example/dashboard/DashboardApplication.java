@@ -1,9 +1,7 @@
 package com.example.dashboard;
 
-<<<<<<< HEAD
 import com.example.dashboard.entities.*;
 import com.example.dashboard.repositories.*;
-=======
 import com.example.dashboard.entities.Categoria;
 import com.example.dashboard.entities.DetallePedido;
 import com.example.dashboard.entities.Empresa;
@@ -12,7 +10,6 @@ import com.example.dashboard.repositories.CategoriaRepository;
 import com.example.dashboard.repositories.DetallePedidoRepository;
 import com.example.dashboard.repositories.EmpresaRepository;
 import com.example.dashboard.repositories.SucursalRepository;
->>>>>>> 5781b3c2c7fda100b46e7a5e38c2c5eab211a6f9
 
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -147,5 +144,5 @@ public class DashboardApplication {
 
 		};
 	}
-	
+
 }
