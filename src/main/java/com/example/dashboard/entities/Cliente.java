@@ -33,8 +33,7 @@ public class Cliente extends Base{
     @OneToOne
     private ImagenCliente imagenCliente;
 
-    @OneToMany
-    @JoinColumn(name = "cliente_id")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Builder.Default //Builder no sobreescribe la inicializacion de la lista
     private List<Pedido> pedidos = new ArrayList<>();
 
