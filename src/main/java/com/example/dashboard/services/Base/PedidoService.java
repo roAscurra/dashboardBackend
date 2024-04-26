@@ -1,4 +1,6 @@
 package com.example.dashboard.services.Base;
 
-public interface PedidoService {
+import com.example.dashboard.entities.Pedido;
+
+public interface PedidoService extends BaseService<Pedido, Long>{
 }

@@ -1,4 +1,6 @@
 package com.example.dashboard.services.Base;
 
-public interface FacturaService {
+import com.example.dashboard.entities.Factura;
+
+public interface FacturaService extends BaseService<Factura, Long> {
 }

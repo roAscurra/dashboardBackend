@@ -1,4 +1,6 @@
 package com.example.dashboard.services.Base;
 
-public interface ArticuloManufacturadoService {
+import com.example.dashboard.entities.ArticuloManufacturado;
+
+public interface ArticuloManufacturadoService extends BaseService<ArticuloManufacturado,Long>{
 }
