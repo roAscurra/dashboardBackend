@@ -34,9 +34,6 @@ public class ArticuloInsumo extends Base{
     @JoinColumn(name="imagen_insumo_id")
     private ImagenPromocion imagenInsumo;
 
-    @ManyToOne
-    @JoinColumn(name="categoria_articulo_id")
-    private CategoriaArticulo categoriaArticulo;
 
 
 

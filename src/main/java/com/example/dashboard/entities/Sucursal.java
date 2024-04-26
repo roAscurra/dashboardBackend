@@ -1,10 +1,11 @@
 package com.example.dashboard.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,4 +20,8 @@ public class Sucursal extends Base{
     private LocalTime horarioApertura;
     @Column(name = "horarioCierre")
     private LocalTime horarioCierre;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "idEmpresa")
+    private Empresa empresa;
 }
