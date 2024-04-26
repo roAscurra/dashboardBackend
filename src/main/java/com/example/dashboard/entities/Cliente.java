@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -34,7 +36,7 @@ public class Cliente extends Base{
     @OneToMany
     @JoinColumn(name = "cliente_id")
     @Builder.Default //Builder no sobreescribe la inicializacion de la lista
-    private Set<Pedido> pedidos = new HashSet<>();
+    private List<Pedido> pedidos = new ArrayList<>();
 
     @ManyToMany
     //JoinTable crea una tabla intermedia
@@ -42,5 +44,5 @@ public class Cliente extends Base{
                 joinColumns = @JoinColumn(name = "cliente_id"),
                 inverseJoinColumns = @JoinColumn(name = "domicilio_id"))
     @Builder.Default
-    private Set<Domicilio> domicilios = new HashSet<>();
+    private List<Domicilio> domicilios = new ArrayList<>();
 }
