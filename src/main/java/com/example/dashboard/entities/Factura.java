@@ -2,6 +2,7 @@ package com.example.dashboard.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 import lombok.*;
 
 import java.time.LocalDate;
