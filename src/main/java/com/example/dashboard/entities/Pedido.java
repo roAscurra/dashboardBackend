@@ -1,7 +1,6 @@
 package com.example.dashboard.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -28,7 +27,7 @@ public class Pedido extends Base{
     private LocalDate FechaPedido;
 
     @ManyToOne
-    @JoinColumn (name="domicilio_id")
+    @JoinColumn(name="domicilio_id")
     private Domicilio domicilio;
 
     @ManyToOne
