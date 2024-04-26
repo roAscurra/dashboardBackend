@@ -21,18 +21,24 @@ public class Sucursal extends Base{
     private LocalTime horarioCierre;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "fk_empresa")
+    @JoinColumn(name = "empresa_id")
     private Empresa empresa;
 
     @ManyToMany
     @JoinTable(name = "sucursal_promocion",
-    joinColumns = @JoinColumn(name = "fk_sucursal"),
-    inverseJoinColumns = @JoinColumn(name = "fk_promocion"))
+    joinColumns = @JoinColumn(name = "sucursal_id"),
+    inverseJoinColumns = @JoinColumn(name = "promocion_id"))
     private List<Promocion> promociones;
 
     @ManyToMany
     @JoinTable(name = "sucursal_categoria",
-            joinColumns = @JoinColumn(name = "fk_sucursal"),
-            inverseJoinColumns = @JoinColumn(name = "fk_categoria"))
+            joinColumns = @JoinColumn(name = "sucursal_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id"))
     private List<Categoria> categorias;
+
+    @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Pedido> pedidos;
+
+    @OneToOne
+    private Domicilio domicilio;
 }

@@ -16,4 +16,8 @@ public class ArticuloManufacturadoDetalle  extends Base{
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="articulo_insumo")
     private ArticuloInsumo articuloInsumo;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "articuloManufacturado_id")
+    private ArticuloManufacturado articuloManufacturado;
 }

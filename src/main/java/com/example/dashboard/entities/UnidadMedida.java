@@ -15,6 +15,6 @@ public class UnidadMedida extends Base {
     @Column
     private String denominacion;
 
-@OneToMany(mappedBy = "unidadMedida", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-private List<UnidadMedida> unidadMedida;
+    @OneToMany(mappedBy = "unidadMedida", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Articulo> articulos;
 }

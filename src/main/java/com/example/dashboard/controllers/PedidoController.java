@@ -15,7 +15,4 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
         super(service);
     }
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> ec891c0b646af286a4f33114a5648cf3cfa37c7c
