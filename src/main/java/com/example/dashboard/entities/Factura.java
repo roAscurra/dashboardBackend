@@ -27,4 +27,9 @@ public class Factura extends Base{
     private Enum formaPago;
     @Column(name = "totalVenta")
     private Double totalVenta;
+
+    
+    @OneToOne
+    private Factura factura;
+
 }
