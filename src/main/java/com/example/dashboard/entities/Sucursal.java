@@ -20,8 +20,8 @@ public class Sucursal extends Base{
     @Column(name = "horarioCierre")
     private LocalTime horarioCierre;
 
-    @OneToOne
-    @JoinColumn(name = "idEmpresa")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "fk_empresa")
     private Empresa empresa;
 
 }
