@@ -1,10 +1,10 @@
 package com.example.dashboard.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,4 +27,9 @@ public class Domicilio extends Base{
     @ManyToOne
     @JoinColumn(name="localidad_id")
     private Localidad localidad;
+
+
+    @OneToMany(mappedBy = "domicilio", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Builder.Default //Builder no sobreescribe la inicializacion de la lista
+    private List<Pedido> pedidos = new ArrayList<>();
 }

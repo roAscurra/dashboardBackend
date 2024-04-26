@@ -20,25 +20,7 @@ public class Categoria extends Base{
     @Column(name = "denominacion")
     private String denominacion;
 
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Sucursal> articulo;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idSucursal")
-    @JsonBackReference
-    private Sucursal sucursal;
 
-    @ManyToMany(cascade = CascadeType.REFRESH)
-    private List<Sucursal> sucursales;
-
-    @OneToMany()
-    @JoinColumn(name = "articulo_id")
-    @Builder.Default //Builder no sobreescribe la inicializacion de la lista
-    private List<Articulo> articulos = new ArrayList<>();
-
-    @OneToMany
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
 
 }

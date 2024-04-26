@@ -20,8 +20,14 @@ public class Sucursal extends Base{
     @Column(name = "horarioCierre")
     private LocalTime horarioCierre;
 
-    @OneToOne
-    @JoinColumn(name = "idEmpresa")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "fk_empresa")
     private Empresa empresa;
+
+    @ManyToMany
+    @JoinTable(name = "sucursal_promocion",
+    joinColumns = @JoinColumn(name = "fk_sucursal"),
+    inverseJoinColumns = @JoinColumn(name = "fk_promocion"))
+    private List<Promocion> promociones;
 
 }

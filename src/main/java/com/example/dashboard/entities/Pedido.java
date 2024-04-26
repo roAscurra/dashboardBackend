@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -41,6 +43,5 @@ public class Pedido extends Base{
 
     @OneToOne
     private Factura factura;
-
 
 }
