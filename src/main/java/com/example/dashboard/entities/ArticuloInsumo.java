@@ -26,13 +26,6 @@ public class ArticuloInsumo extends Base{
 
 
 
-    @ManyToOne
-    @JoinColumn(name="unidad_medida_id")
-    private UnidadMedida unidadMedida;
-
-    @ManyToOne
-    @JoinColumn(name="imagen_insumo_id")
-    private ImagenPromocion imagenInsumo;
 
 
 

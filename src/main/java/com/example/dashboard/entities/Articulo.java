@@ -2,6 +2,8 @@ package com.example.dashboard.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.*;
 
 @Entity
@@ -15,4 +17,8 @@ public class Articulo extends Base{
     private String denominacion;
     @Column(name = "precioVenta")
     private Double precioVenta;
+
+    @OneToOne
+    @JoinColumn(name = "articuloInsumo")
+    private ArticuloInsumo articuloInsumo;
 }
