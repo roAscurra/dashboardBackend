@@ -1,5 +1,6 @@
 package com.example.dashboard.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,5 +24,6 @@ public class Sucursal extends Base{
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idEmpresa")
+    @JsonBackReference
     private Empresa empresa;
 }

@@ -1,5 +1,7 @@
 package com.example.dashboard.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +21,8 @@ public class Empresa extends Base{
     @Column(name = "cuil")
     private int cuil;
 
-    @OneToMany(mappedBy = "empresa")
 
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Sucursal> sucursales;
 }
