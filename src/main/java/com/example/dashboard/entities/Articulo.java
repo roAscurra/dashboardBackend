@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@MappedSuperclass
 public class Articulo extends Base{
     @Column(name = "denominacion")
     protected String denominacion;
@@ -20,9 +19,22 @@ public class Articulo extends Base{
     protected Double precioVenta;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "fk_articuloInsumo")
+    @JoinColumn(name = "articuloInsumo_id")
     private ArticuloInsumo articuloInsumo;
 
-    @OneToMany(mappedBy = "promocion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//FIJARSE LAS FLECHAS DE ARTICULOMANUFACTURADO Y ARTICULOINSUMO QUE VAN A ARTICULO
+
+    @OneToMany(mappedBy = "articulo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ImagenPromocion> imagenPromociones;
+
+    @OneToMany(mappedBy = "articulo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<DetallePedido> detallePedidos;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "unidadMedida_id")
+    private UnidadMedida unidadMedida;
 }

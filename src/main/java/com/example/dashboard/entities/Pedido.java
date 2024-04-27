@@ -28,16 +28,22 @@ public class Pedido extends Base{
     @Column(name = "FechaPedido")
     private LocalDate FechaPedido;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="domicilio_id")
     private Domicilio domicilio;
 
-    @ManyToOne
-    @JoinColumn (name="sucursal_id")
-    private Sucursal sucrusal;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="sucursal_id")
+    private Sucursal sucursal;
 
-    
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="cliente_id")
+    private Cliente cliente;
+
     @OneToOne
     private Factura factura;
 
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<DetallePedido> detallePedidos ;
+//nullable false
 }

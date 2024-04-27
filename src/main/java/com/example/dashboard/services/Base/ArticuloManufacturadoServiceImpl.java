@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class ArticuloManufacturadoServiceImpl extends BaseServiceImpl<ArticuloManufacturado,Long> implements ArticuloManufacturadoService {
 
-        private ArticuloManufacturadoRepository articuloManufacturadoRepository;
 
-        public ArticuloManufacturadoServiceImpl(ArticuloManufacturadoRepository articuloManufacturadoRepository) {
-            super((BaseRepository<ArticuloManufacturado, Long>) articuloManufacturadoRepository);
-            this.articuloManufacturadoRepository = articuloManufacturadoRepository;
-        }
+    private ArticuloManufacturadoRepository articuloManufacturadoRepository;
+
+    public ArticuloManufacturadoServiceImpl(ArticuloManufacturadoRepository articuloManufacturadoRepository) {
+        super((BaseRepository<ArticuloManufacturado, Long>) articuloManufacturadoRepository);
+        this.articuloManufacturadoRepository = articuloManufacturadoRepository;
+    }
 }

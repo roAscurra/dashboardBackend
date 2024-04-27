@@ -15,7 +15,10 @@ public class ImagenPromocion extends Base{
 
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "fk_promocion")
+    @JoinColumn(name = "promocion_id")
     private Promocion promocion;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "articulo_id")
+    private Articulo articulo;
 }

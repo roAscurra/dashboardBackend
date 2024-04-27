@@ -18,4 +18,11 @@ public class DetallePedido extends Base{
     @Column(name = "subTotal")
     private Double subTotal;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "pedido_id", nullable = false)
+    private Pedido pedido;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "articulo_id")
+    private Articulo articulo;
 }
