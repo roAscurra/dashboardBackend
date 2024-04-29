@@ -1,9 +1,7 @@
 package com.example.dashboard.controllers;
 
-import com.example.dashboard.entities.Articulo;
 import com.example.dashboard.entities.ArticuloInsumo;
-import com.example.dashboard.services.Base.ArticuloInsumoServiceImpl;
-import com.example.dashboard.services.Base.ArticuloServiceImpl;
+import com.example.dashboard.services.impl.ArticuloInsumoServiceImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
