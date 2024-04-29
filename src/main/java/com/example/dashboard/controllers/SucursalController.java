@@ -1,8 +1,7 @@
 package com.example.dashboard.controllers;
 
 import com.example.dashboard.entities.Sucursal;
-import com.example.dashboard.services.Base.ProvinciaServiceImpl;
-import com.example.dashboard.services.Base.SucursalServiceImpl;
+import com.example.dashboard.services.impl.SucursalServiceImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
