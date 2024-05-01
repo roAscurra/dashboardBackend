@@ -1,7 +1,7 @@
 package com.example.dashboard.controllers;
 
 import com.example.dashboard.entities.ImagenPromocion;
-import com.example.dashboard.services.Base.ImagenPromocionServiceImpl;
+import com.example.dashboard.services.impl.ImagenPromocionServiceImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

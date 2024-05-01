@@ -1,9 +1,7 @@
 package com.example.dashboard.controllers;
 
 import com.example.dashboard.entities.Empresa;
-import com.example.dashboard.entities.Localidad;
-import com.example.dashboard.services.Base.EmpresaServiceImpl;
-import com.example.dashboard.services.Base.LocalidadServiceImpl;
+import com.example.dashboard.services.impl.EmpresaServiceImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

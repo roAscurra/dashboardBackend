@@ -3,16 +3,18 @@ package com.example.dashboard.entities;
 import jakarta.persistence.*;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Articulo extends Base{
+@SuperBuilder
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Articulo extends Base {
     @Column(name = "denominacion")
     protected String denominacion;
     @Column(name = "precioVenta")
@@ -37,4 +39,6 @@ public class Articulo extends Base{
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "unidadMedida_id")
     private UnidadMedida unidadMedida;
+
+
 }
