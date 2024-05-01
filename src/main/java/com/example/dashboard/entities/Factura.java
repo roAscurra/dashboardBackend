@@ -1,5 +1,6 @@
 package com.example.dashboard.entities;
 
+import com.example.dashboard.entities.enums.FormaPago;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
@@ -26,7 +27,7 @@ public class Factura extends Base{
     @Column(name = "mpPaymentType")
     private String mpPaymentType;
     @Column(name = "formaPago")
-    private Enum formaPago;
+    private FormaPago formaPago;
     @Column(name = "totalVenta")
     private Double totalVenta;
 

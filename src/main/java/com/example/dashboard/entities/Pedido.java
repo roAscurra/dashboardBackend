@@ -1,5 +1,8 @@
 package com.example.dashboard.entities;
 
+import com.example.dashboard.entities.enums.Estado;
+import com.example.dashboard.entities.enums.FormaPago;
+import com.example.dashboard.entities.enums.TipoEnvio;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -23,11 +26,13 @@ public class Pedido extends Base{
     @Column(name = "totalCosto")
     private Double totalCosto;
     @Column(name = "estado")
-    private Enum estado;
+    private Estado estado;
     @Column(name = "formaPago")
-    private Enum formaPago;
+    private FormaPago formaPago;
     @Column(name = "FechaPedido")
     private LocalDate FechaPedido;
+    @Column(name = "TipoEnvio")
+    private TipoEnvio tipoEnvio;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="domicilio_id")

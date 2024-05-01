@@ -38,4 +38,6 @@ public class Articulo extends Base {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "unidadMedida_id")
     private UnidadMedida unidadMedida;
+
+
 }

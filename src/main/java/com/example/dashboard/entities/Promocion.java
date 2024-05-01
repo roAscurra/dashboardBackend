@@ -1,5 +1,6 @@
 package com.example.dashboard.entities;
 
+import com.example.dashboard.entities.enums.TipoPromocion;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,22 +31,17 @@ public class Promocion extends Base{
     private String descripcionDescuento;
     @Column(name = "precioPromocional")
     private Double precioPromocional;
-
-    @Enumerated(EnumType.STRING)
     @Column(name = "tipoPromocion")
     private TipoPromocion tipoPromocion;
 
-    public enum TipoPromocion {
-        DESCUENTO,
-        REGALO,
-        ENVIO_GRATIS,
-        OTRO
-    }
 
     @OneToMany(mappedBy = "promocion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ImagenPromocion> imagenPromociones;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "fk_articulo")
-    private Articulo articulo;
+
+    @ManyToMany
+    @JoinTable(name = "promocion_articulos",
+            joinColumns = @JoinColumn(name = "articulo_id"),
+            inverseJoinColumns = @JoinColumn(name = "promocion_id"))
+    private List<Articulo> articulos;
 }
