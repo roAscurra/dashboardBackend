@@ -5,6 +5,7 @@ import com.example.dashboard.repositories.ArticuloManufacturadoRepository;
 import com.example.dashboard.repositories.BaseRepository;
 
 import com.example.dashboard.services.ArticuloManufacturadoService;
+import com.example.dashboard.services.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 @Service
 public class ArticuloManufacturadoServiceImpl extends BaseServiceImpl<ArticuloManufacturado,Long> implements ArticuloManufacturadoService {

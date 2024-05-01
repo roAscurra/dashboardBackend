@@ -4,6 +4,7 @@ import com.example.dashboard.entities.ArticuloManufacturadoDetalle;
 import com.example.dashboard.repositories.ArticuloManufacturadoDetalleRepository;
 import com.example.dashboard.repositories.BaseRepository;
 import com.example.dashboard.services.ArticuloManufacturadoDetalleService;
+import com.example.dashboard.services.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 @Service

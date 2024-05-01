@@ -3,6 +3,7 @@ package com.example.dashboard.services.impl;
 import com.example.dashboard.entities.Domicilio;
 import com.example.dashboard.repositories.BaseRepository;
 import com.example.dashboard.repositories.DomicilioRepository;
+import com.example.dashboard.services.BaseServiceImpl;
 import com.example.dashboard.services.DomicilioService;
 import org.springframework.stereotype.Service;
 

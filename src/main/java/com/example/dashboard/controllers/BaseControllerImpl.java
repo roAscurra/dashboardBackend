@@ -2,7 +2,7 @@ package com.example.dashboard.controllers;
 
 import com.example.dashboard.controllers.base.BaseController;
 import com.example.dashboard.entities.Base;
-import com.example.dashboard.services.impl.BaseServiceImpl;
+import com.example.dashboard.services.BaseServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

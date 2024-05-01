@@ -4,6 +4,7 @@ import com.example.dashboard.entities.Articulo;
 import com.example.dashboard.repositories.ArticuloRepository;
 import com.example.dashboard.repositories.BaseRepository;
 import com.example.dashboard.services.ArticuloService;
+import com.example.dashboard.services.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 @Service

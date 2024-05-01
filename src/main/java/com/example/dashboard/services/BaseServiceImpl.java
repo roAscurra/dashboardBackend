@@ -1,4 +1,4 @@
-package com.example.dashboard.services.impl;
+package com.example.dashboard.services;
 
 import com.example.dashboard.entities.Base;
 import com.example.dashboard.repositories.BaseRepository;

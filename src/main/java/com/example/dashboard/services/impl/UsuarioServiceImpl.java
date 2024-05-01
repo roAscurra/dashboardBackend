@@ -3,6 +3,7 @@ package com.example.dashboard.services.impl;
 import com.example.dashboard.entities.Usuario;
 import com.example.dashboard.repositories.BaseRepository;
 import com.example.dashboard.repositories.UsuarioRepository;
+import com.example.dashboard.services.BaseServiceImpl;
 import com.example.dashboard.services.UsuarioService;
 import org.springframework.stereotype.Service;
 

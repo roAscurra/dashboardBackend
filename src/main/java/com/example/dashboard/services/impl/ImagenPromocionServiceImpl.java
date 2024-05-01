@@ -3,6 +3,7 @@ package com.example.dashboard.services.impl;
 import com.example.dashboard.entities.ImagenPromocion;
 import com.example.dashboard.repositories.BaseRepository;
 import com.example.dashboard.repositories.ImagenPromocionRepository;
+import com.example.dashboard.services.BaseServiceImpl;
 import com.example.dashboard.services.ImagenPromocionService;
 import org.springframework.stereotype.Service;
 

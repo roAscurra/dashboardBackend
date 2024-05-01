@@ -3,6 +3,7 @@ package com.example.dashboard.services.impl;
 import com.example.dashboard.entities.Pais;
 import com.example.dashboard.repositories.BaseRepository;
 import com.example.dashboard.repositories.PaisRepository;
+import com.example.dashboard.services.BaseServiceImpl;
 import com.example.dashboard.services.PaisService;
 import org.springframework.stereotype.Service;
 
