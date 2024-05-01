@@ -20,13 +20,13 @@ public class Promocion extends Base{
     @Column(name = "denominacion")
     private String denominacion;
     @Column(name = "FechaDesde")
-    private LocalDate FechaDesde;
+    private LocalDate fechaDesde;
     @Column(name = "FechaHasta")
-    private LocalDate FechaHasta;
+    private LocalDate fechaHasta;
     @Column(name = "HoraDesde")
-    private LocalTime HoraDesde;
+    private LocalTime horaDesde;
     @Column(name = "HoraHasta")
-    private LocalTime HoraHasta;
+    private LocalTime horaHasta;
     @Column(name = "descripcionDescuento")
     private String descripcionDescuento;
     @Column(name = "precioPromocional")
