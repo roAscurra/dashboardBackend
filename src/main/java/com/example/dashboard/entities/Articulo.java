@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Articulo extends Base{
     @Column(name = "denominacion")
     protected String denominacion;
