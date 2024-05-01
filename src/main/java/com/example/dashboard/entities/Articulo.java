@@ -3,17 +3,18 @@ package com.example.dashboard.entities;
 import jakarta.persistence.*;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
+@Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Articulo extends Base{
+public class Articulo extends Base {
     @Column(name = "denominacion")
     protected String denominacion;
     @Column(name = "precioVenta")
