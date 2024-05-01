@@ -2,6 +2,7 @@ package com.example.dashboard.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -10,8 +11,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class ArticuloManufacturado extends Base{
+@SuperBuilder
+public class ArticuloManufacturado extends Articulo{
     @Column(name = "descripcion")
     private String descripcion;
     @Column(name = "tiempoEstimadoMinutos")

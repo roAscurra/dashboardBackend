@@ -2,13 +2,14 @@ package com.example.dashboard.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 public class ImagenPromocion extends Base{
     @Column(name = "denominacion")
     private String denominacion;
