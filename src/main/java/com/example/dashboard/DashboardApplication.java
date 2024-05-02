@@ -65,6 +65,8 @@ public class DashboardApplication {
 	private ClienteRepository clienteRepository;
 
 	@Autowired
+	private UnidadMedidaRepository unidadMedidaRepository;
+	@Autowired
 	private CategoriaRepository categoriaRepository;
 
 	@Autowired
@@ -131,24 +133,46 @@ public class DashboardApplication {
 					.nroDpto(0)
 					.localidad(localidad1)
 					.build();
+			// Guarda los domicilios en la base de datos
 			domicilioRepository.save(domicilioChacras);
 			domicilioRepository.save(domicilioGodoyCruz);
 			domicilioRepository.save(domicilioCliente);
 
+			// Asigna los domicilios a las sucursales después de guardarlos
 			sucursalChacras.setDomicilio(domicilioChacras);
 			sucursalGodoyCruz.setDomicilio(domicilioGodoyCruz);
+
+			// Guardar la empresa en la base de datos
+			empresaRepository.save(empresaBrown);
+
+			// Asignar la empresa a las sucursales
+			sucursalChacras.setEmpresa(empresaBrown);
+			sucursalGodoyCruz.setEmpresa(empresaBrown);
+
+			// Guardar las sucursales en la base de datos
 			sucursalRepository.save(sucursalChacras);
 			sucursalRepository.save(sucursalGodoyCruz);
 
+
+			// Agrega las sucursales a la lista de sucursales de la empresa
 			empresaBrown.getSucursales().add(sucursalChacras);
 			empresaBrown.getSucursales().add(sucursalGodoyCruz);
 
-
-
+			// Guarda las sucursales y la empresa en la base de datos
+			sucursalRepository.save(sucursalChacras);
+			sucursalRepository.save(sucursalGodoyCruz);
 			empresaRepository.save(empresaBrown);
 
-			// Crear Unidades de medida
 
+			// Crear Unidades de medida
+			UnidadMedida unidadMedidaLitros = UnidadMedida.builder().denominacion("Litros").build();
+			UnidadMedida unidadMedidaGramos = UnidadMedida.builder().denominacion("Gramos").build();
+			UnidadMedida unidadMedidaCantidad = UnidadMedida.builder().denominacion("Cantidad").build();
+			UnidadMedida unidadMedidaPorciones = UnidadMedida.builder().denominacion("Porciones").build();
+			unidadMedidaRepository.save(unidadMedidaLitros);
+			unidadMedidaRepository.save(unidadMedidaGramos);
+			unidadMedidaRepository.save(unidadMedidaCantidad);
+			unidadMedidaRepository.save(unidadMedidaPorciones);
 
 			// Crear Categorías de productos y subCategorías de los mismos
 //			Categoria categoria1 = Categoria.builder()
@@ -181,10 +205,10 @@ public class DashboardApplication {
 
 
 			// Crear Insumos , coca cola , harina , etc
-//			ArticuloInsumo cocaCola = ArticuloInsumo.builder().denominacion("Coca cola").unidadMedida(unidadMedidaLitros).esParaElaborar(false).stockActual(5).stockMaximo(50).precioCompra(50.0).precioVenta(70.0).build();
-//			ArticuloInsumo harina = ArticuloInsumo.builder().denominacion("Harina").unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(4).stockMaximo(40).precioCompra(40.0).precioVenta(60.5).build();
-//			ArticuloInsumo queso = ArticuloInsumo.builder().denominacion("Queso").unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
-//			ArticuloInsumo tomate = ArticuloInsumo.builder().denominacion("Tomate").unidadMedida(unidadMedidaCantidad).esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
+			ArticuloInsumo cocaCola = ArticuloInsumo.builder().denominacion("Coca cola").unidadMedida(unidadMedidaLitros).esParaElaborar(false).stockActual(5).stockMaximo(50).precioCompra(50.0).precioVenta(70.0).build();
+			ArticuloInsumo harina = ArticuloInsumo.builder().denominacion("Harina").unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(4).stockMaximo(40).precioCompra(40.0).precioVenta(60.5).build();
+			ArticuloInsumo queso = ArticuloInsumo.builder().denominacion("Queso").unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
+			ArticuloInsumo tomate = ArticuloInsumo.builder().denominacion("Tomate").unidadMedida(unidadMedidaCantidad).esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
 
 			// crear fotos para cada insumo
 			ImagenPromocion imagenCoca = ImagenPromocion.builder().denominacion("https://m.media-amazon.com/images/I/51v8nyxSOYL._SL1500_.jpg").build();
@@ -251,10 +275,14 @@ public class DashboardApplication {
 //			promocionDiaEnamorados.getArticulos().add(pizzaNapolitana);
 			promocionRepository.save(promocionDiaEnamorados);
 
+			imagenPizzaMuzarella.setPromocion(promocionDiaEnamorados);
+			imagenPizzaNapolitana.setPromocion(promocionDiaEnamorados);
+			imagenPromocionRepository.save(imagenPizzaMuzarella);
+			imagenPromocionRepository.save(imagenPizzaNapolitana);
 			//Agregar categorias y promociones a sucursales
 //			sucursalChacras.getCategorias().add(categoria1);
 //			sucursalChacras.getCategorias().add(categoria2);
-//			sucursalChacras.getPromociones().add(promocionDiaEnamorados);
+			sucursalChacras.getPromociones().add(promocionDiaEnamorados);
 //
 //			sucursalGodoyCruz.getCategorias().add(categoria1);
 //			sucursalGodoyCruz.getCategorias().add(categoria2);
@@ -285,6 +313,8 @@ public class DashboardApplication {
 			logger.info("{}",sucursalChacras);
 			logger.info("----------------Sucursal Godoy Cruz ---------------------");
 			logger.info("{}",sucursalGodoyCruz);
+			logger.info("----------------Empresa sucursal ---------------------");
+			logger.info(sucursalChacras.getEmpresa().getNombre());
 			logger.info("----------------Pedido ---------------------");
 //			logger.info("{}",pedido);
 
