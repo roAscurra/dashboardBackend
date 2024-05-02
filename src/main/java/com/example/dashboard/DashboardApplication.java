@@ -186,10 +186,19 @@ public class DashboardApplication {
 			unidadMedidaRepository.save(unidadMedidaPorciones);
 
 			// Crear Categorías de productos y subCategorías de los mismos
-//			Categoria categoria1 = Categoria.builder()
-//					.denominacion("Pizzas")
-//					.build();
+			Categoria categoria1 = Categoria.builder()
+					.denominacion("Pizzas")
+					.build();
+			Categoria categoria2 = Categoria.builder()
+					.denominacion("Sandwichs")
+					.build();
 
+			categoriaRepository.save(categoria1);
+			categoriaRepository.save(categoria2);
+			sucursalChacras.getCategorias().add(categoria1);
+			sucursalChacras.getCategorias().add(categoria2);
+			sucursalGodoyCruz.getCategorias().add(categoria1);
+			sucursalGodoyCruz.getCategorias().add(categoria2);
 
 			// Crear instancias de DetallePedido
 //			DetallePedido detallePedido1 = DetallePedido.builder()
@@ -278,6 +287,7 @@ public class DashboardApplication {
 					.build();
 //			promocionDiaEnamorados.getArticulos().add(cocaCola);
 //			promocionDiaEnamorados.getArticulos().add(pizzaNapolitana);
+
 			promocionRepository.save(promocionDiaEnamorados);
 
 			imagenPizzaMuzarella.setPromocion(promocionDiaEnamorados);
@@ -324,65 +334,67 @@ public class DashboardApplication {
 //			logger.info("{}",pedido);
 
 
-			UnidadMedida unidadMedida = new UnidadMedida();
-			unidadMedida.setDenominacion("kg");
-			unidadMedida = unidadMedidaRepository.save(unidadMedida);
+			UnidadMedida unidadMedida = UnidadMedida.builder()
+					.denominacion("kg").build();
+			unidadMedidaRepository.save(unidadMedida);
 
 			logger.info("----------------Unidad de medida: KG ---------------------");
 			logger.info("{}",unidadMedida);
 
-			Categoria categoria = new Categoria();
-			categoria.setDenominacion("Bebidas");
+			Categoria categoria = Categoria.builder().denominacion("Bebidas").build();
 			categoria = categoriaRepository.save(categoria);
 			logger.info("----------------Categoria: BEDIDAS ---------------------");
 			logger.info("{}",categoria);
 
-			Pedido pedido = new Pedido();
-			pedido.setHoraEstimadaFinalizacion(LocalDateTime.now().toLocalTime());
-			pedido.setTotal(200.400);
-			pedido.setTotalCosto(10.500);
-			pedido.setEstado(Estado.entregado);
-			pedido.setTipoEnvio(TipoEnvio.delivery);
-			pedido.setFormaPago(FormaPago.MercadoPago);
-			pedido.setFechaPedido(LocalDate.now());
-			pedido = pedidoRepository.save(pedido);
+			Pedido pedido = Pedido.builder()
+					.horaEstimadaFinalizacion(LocalDateTime.now().toLocalTime())
+					.total(200.400)
+					.totalCosto(10.500)
+					.estado(Estado.entregado)
+					.tipoEnvio(TipoEnvio.delivery)
+					.formaPago(FormaPago.MercadoPago)
+					.FechaPedido(LocalDate.now()).build();
+			pedidoRepository.save(pedido);
 
 
 			logger.info("----------------Pedido: pedido ---------------------");
 			logger.info("{}",pedido);
 
-			DetallePedido detallePedido = new DetallePedido();
-			detallePedido.setCantidad(100);
-			detallePedido.setSubTotal(250.50);
-			detallePedido.setPedido(pedido);
-			detallePedido = detallePedidoRepository.save(detallePedido);
+			DetallePedido detallePedido = DetallePedido.builder()
+					.cantidad(100)
+					.subTotal(250.50)
+					.pedido(pedido).build();
+			detallePedidoRepository.save(detallePedido);
+
 			logger.info("----------------Detalle pedido: 100, 250.50 ---------------------");
 			logger.info("{}",detallePedido);
 
-			Factura factura = new Factura();
-			factura.setFechaFacturacion(LocalDate.of(2024,1,10));
-			factura.setMpPaymentId(1);
-			factura.setMpMerchantOrderId(1);
-			factura.setMpPreferenceId("1");
-			factura.setMpPaymentType("1");
-			factura.setFormaPago(FormaPago.MercadoPago);
-			factura.setTotalVenta(10.00);
-			factura = facturaRepository.save(factura);
+			Factura factura = Factura.builder()
+					.fechaFacturacion(LocalDate.of(2024,1,10))
+					.mpPaymentId(1)
+					.mpMerchantOrderId(1)
+					.mpPreferenceId("1")
+					.mpPaymentType("1")
+					.formaPago(FormaPago.MercadoPago)
+					.totalVenta(10.00).build();
+			facturaRepository.save(factura);
+
 			logger.info("---------------- Factura: factura ---------------------");
 			logger.info("{}",factura);
 
-			ArticuloManufacturado articuloManufacturado = new ArticuloManufacturado();
-			articuloManufacturado.setDescripcion("Pizza de pepperoni");
-			articuloManufacturado.setTiempoEstimadoMinutos(20);
-			articuloManufacturado.setPreparacion("1. Precalentar el horno a 180°C.\n2. Extender la masa de pizza sobre una bandeja.\n3. Agregar salsa de tomate, queso y pepperoni.\n4. Hornear durante 20 minutos o hasta que la masa esté dorada.");
-			articuloManufacturado = articuloManufacturadoRepository.save(articuloManufacturado);
+			ArticuloManufacturado articuloManufacturado = ArticuloManufacturado.builder()
+					.descripcion("Pizza de pepperoni")
+					.tiempoEstimadoMinutos(20)
+					.preparacion("1. Precalentar el horno a 180°C.\n2. Extender la masa de pizza sobre una bandeja.\n3. Agregar salsa de tomate, queso y pepperoni.\n4. Hornear durante 20 minutos o hasta que la masa esté dorada.")
+					.build();
+			articuloManufacturadoRepository.save(articuloManufacturado);
 
 			logger.info("---------------- Articulo Manufacturado: articulo manufacturado ---------------------");
 			logger.info("{}",articuloManufacturado);
 
-			ArticuloManufacturadoDetalle articuloManufacturadoDetalle = new ArticuloManufacturadoDetalle();
-			articuloManufacturadoDetalle.setCantidad(2);
-			articuloManufacturadoDetalle = articuloManufacturadoDetalleRepository.save(articuloManufacturadoDetalle);
+			ArticuloManufacturadoDetalle articuloManufacturadoDetalle = ArticuloManufacturadoDetalle.builder()
+					.cantidad(2).build();
+			articuloManufacturadoDetalleRepository.save(articuloManufacturadoDetalle);
 
 			logger.info("---------------- Articulo Manufacturado Detalle: articulo manufacturado detalle ---------------------");
 			logger.info("{}",articuloManufacturadoDetalle);
