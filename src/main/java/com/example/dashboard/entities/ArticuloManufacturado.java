@@ -23,7 +23,4 @@ public class ArticuloManufacturado extends Articulo{
     @OneToMany(mappedBy = "articuloManufacturado", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ArticuloManufacturadoDetalle> articuloManufacturadoDetalles;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "articuloInsumo_id")
-    private ArticuloInsumo articuloInsumo;
 }
