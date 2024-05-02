@@ -23,7 +23,7 @@ import java.time.LocalTime;
 @SpringBootApplication
 public class DashboardApplication {
 
-	private static final Logger logger = (Logger) LoggerFactory.getLogger(DashboardApplication.class);
+	private static final Logger logger = LoggerFactory.getLogger(DashboardApplication.class);
 
 	@Autowired
 	private EmpresaRepository empresaRepository;
@@ -68,25 +68,14 @@ public class DashboardApplication {
 	private CategoriaRepository categoriaRepository;
 
 	@Autowired
-	private DetallePedido detallePedido;
+	private DetallePedidoRepository detallePedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DashboardApplication.class, args);
 	}
 
 	@Bean
-	CommandLineRunner init(EmpresaRepository empresaRepository,
-						   SucursalRepository sucursalRepository,
-						   PromocionRepository promocionRepository,
-						   DomicilioRepository domicilioRepository,
-						   LocalidadRepository localidadRepository,
-						   ProvinciaRepository provinciaRepository,
-						   PaisRepository paisRepository,
-						   UsuarioRepository usuarioRepository,
-						   ImagenClienteRepository imagenClienteRepository,
-						   DetallePedidoRepository detallePedidoRepository,
-						   CategoriaRepository categoriaRepository,
-						   ClienteRepository clienteRepository) {
+	CommandLineRunner init() {
 
 		return args -> {
 			logger.info("----------------ESTOY----FUNCIONANDO---------------------");
@@ -142,50 +131,53 @@ public class DashboardApplication {
 					.nroDpto(0)
 					.localidad(localidad1)
 					.build();
-
-			sucursalChacras.setDomicilio(domicilioChacras);
-			sucursalGodoyCruz.setDomicilio(domicilioGodoyCruz);
-			empresaBrown.getSucursales().add(sucursalChacras);
-			empresaBrown.getSucursales().add(sucursalGodoyCruz);
-
 			domicilioRepository.save(domicilioChacras);
 			domicilioRepository.save(domicilioGodoyCruz);
 			domicilioRepository.save(domicilioCliente);
+
+			sucursalChacras.setDomicilio(domicilioChacras);
+			sucursalGodoyCruz.setDomicilio(domicilioGodoyCruz);
 			sucursalRepository.save(sucursalChacras);
 			sucursalRepository.save(sucursalGodoyCruz);
+
+			empresaBrown.getSucursales().add(sucursalChacras);
+			empresaBrown.getSucursales().add(sucursalGodoyCruz);
+
+
+
 			empresaRepository.save(empresaBrown);
 
 			// Crear Unidades de medida
 
 
 			// Crear Categorías de productos y subCategorías de los mismos
-			Categoria categoria1 = Categoria.builder()
-					.denominacion("Pizzas")
-					.build();
-
-			Categoria categoria2 = Categoria.builder()
-					.denominacion("Bebidas")
-					.build();
-
-			categoriaRepository.save(categoria1);
-			categoriaRepository.save(categoria2);
-
-			// Crear instancias de DetallePedido
-			DetallePedido detallePedido1 = DetallePedido.builder()
-					.cantidad(15)
-					.subTotal(500.0)
-					.build();
-
-			DetallePedido detallePedido2 = DetallePedido.builder()
-					.cantidad(20)
-					.subTotal(700.0)
-					.build();
-
-			detallePedidoRepository.save(detallePedido1);
-			detallePedidoRepository.save(detallePedido2);
-
-			categoria1.getSubCategoria().add(categoria2);
-			categoriaRepository.save(categoria1);
+//			Categoria categoria1 = Categoria.builder()
+//					.denominacion("Pizzas")
+//					.build();
+//
+//			Categoria categoria2 = Categoria.builder()
+//					.denominacion("Bebidas")
+//					.build();
+//
+//			categoriaRepository.save(categoria1);
+//			categoriaRepository.save(categoria2);
+//
+//			// Crear instancias de DetallePedido
+//			DetallePedido detallePedido1 = DetallePedido.builder()
+//					.cantidad(15)
+//					.subTotal(500.0)
+//					.build();
+//
+//			DetallePedido detallePedido2 = DetallePedido.builder()
+//					.cantidad(20)
+//					.subTotal(700.0)
+//					.build();
+//
+//			detallePedidoRepository.save(detallePedido1);
+//			detallePedidoRepository.save(detallePedido2);
+//
+//			categoria1.getSubCategoria().add(categoria2);
+//			categoriaRepository.save(categoria1);
 
 
 			// Crear Insumos , coca cola , harina , etc
@@ -260,12 +252,12 @@ public class DashboardApplication {
 			promocionRepository.save(promocionDiaEnamorados);
 
 			//Agregar categorias y promociones a sucursales
-			sucursalChacras.getCategorias().add(categoria1);
-			sucursalChacras.getCategorias().add(categoria2);
-			sucursalChacras.getPromociones().add(promocionDiaEnamorados);
-
-			sucursalGodoyCruz.getCategorias().add(categoria1);
-			sucursalGodoyCruz.getCategorias().add(categoria2);
+//			sucursalChacras.getCategorias().add(categoria1);
+//			sucursalChacras.getCategorias().add(categoria2);
+//			sucursalChacras.getPromociones().add(promocionDiaEnamorados);
+//
+//			sucursalGodoyCruz.getCategorias().add(categoria1);
+//			sucursalGodoyCruz.getCategorias().add(categoria2);
 
 			sucursalRepository.save(sucursalChacras);
 			sucursalRepository.save(sucursalGodoyCruz);
@@ -294,6 +286,7 @@ public class DashboardApplication {
 			logger.info("----------------Sucursal Godoy Cruz ---------------------");
 			logger.info("{}",sucursalGodoyCruz);
 			logger.info("----------------Pedido ---------------------");
+//			logger.info("{}",pedido);
 
 
 		};
