@@ -27,7 +27,7 @@ import java.util.List;
 @SpringBootApplication
 public class DashboardApplication {
 
-	private static final Logger logger = (Logger) LoggerFactory.getLogger(DashboardApplication.class);
+	private static final Logger logger = LoggerFactory.getLogger(DashboardApplication.class);
 
 	@Autowired
 	private EmpresaRepository empresaRepository;
@@ -72,31 +72,30 @@ public class DashboardApplication {
 	private CategoriaRepository categoriaRepository;
 
 	@Autowired
-	private DetallePedido detallePedido;
+	private DetallePedidoRepository detallePedidoRepository;
+
+	@Autowired
+	private UnidadMedidaRepository unidadMedidaRepository;
+
+	@Autowired
+	private  ArticuloManufacturadoDetalleRepository articuloManufacturadoDetalleRepository;
+
+	@Autowired
+	private ArticuloManufacturadoRepository articuloManufacturadoRepository;
+
+	@Autowired
+	private  FacturaRepository facturaRepository;
+
+	@Autowired
+	private PedidoRepository pedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DashboardApplication.class, args);
 	}
 
 	@Bean
-	CommandLineRunner init(EmpresaRepository empresaRepository,
-						   SucursalRepository sucursalRepository,
-						   PromocionRepository promocionRepository,
-						   DomicilioRepository domicilioRepository,
-						   LocalidadRepository localidadRepository,
-						   ProvinciaRepository provinciaRepository,
-						   PaisRepository paisRepository,
-						   UsuarioRepository usuarioRepository,
-						   ImagenClienteRepository imagenClienteRepository,
-						   DetallePedidoRepository detallePedidoRepository,
-						   CategoriaRepository categoriaRepository,
-						   ArticuloRepository articuloRepository,
-						   PedidoRepository pedidoRepository,
-						   FacturaRepository facturaRepository,
-						   ArticuloManufacturadoRepository articuloManufacturadoRepository,
-						   ArticuloManufacturadoDetalleRepository articuloManufacturadoDetalleRepository,
-						   UnidadMedidaRepository unidadMedidaRepository,
-						   ClienteRepository clienteRepository) {
+
+	CommandLineRunner init() {
 
 		return args -> {
 			logger.info("----------------ESTOY----FUNCIONANDO---------------------");
@@ -152,17 +151,20 @@ public class DashboardApplication {
 					.nroDpto(0)
 					.localidad(localidad1)
 					.build();
-
-			sucursalChacras.setDomicilio(domicilioChacras);
-			sucursalGodoyCruz.setDomicilio(domicilioGodoyCruz);
-			empresaBrown.getSucursales().add(sucursalChacras);
-			empresaBrown.getSucursales().add(sucursalGodoyCruz);
-
 			domicilioRepository.save(domicilioChacras);
 			domicilioRepository.save(domicilioGodoyCruz);
 			domicilioRepository.save(domicilioCliente);
+
+			sucursalChacras.setDomicilio(domicilioChacras);
+			sucursalGodoyCruz.setDomicilio(domicilioGodoyCruz);
 			sucursalRepository.save(sucursalChacras);
 			sucursalRepository.save(sucursalGodoyCruz);
+
+			empresaBrown.getSucursales().add(sucursalChacras);
+			empresaBrown.getSucursales().add(sucursalGodoyCruz);
+
+
+
 			empresaRepository.save(empresaBrown);
 
 			// Crear Unidades de medida
@@ -245,8 +247,6 @@ public class DashboardApplication {
 
 			categoria1.getSubCategoria().add(categoria2);
 			categoriaRepository.save(categoria1);
-
-
 
 			// Crear Insumos , coca cola , harina , etc
 			ArticuloInsumo cocaCola = ArticuloInsumo.builder().denominacion("Coca cola").unidadMedida(unidadMedidaLitros).esParaElaborar(false).stockActual(5).stockMaximo(50).precioCompra(50.0).precioVenta(70.0).build();
@@ -381,12 +381,12 @@ public class DashboardApplication {
 			pedidoRepository.save(pedido1);
 
 			//Agregar categorias y promociones a sucursales
-			sucursalChacras.getCategorias().add(categoria1);
-			sucursalChacras.getCategorias().add(categoria2);
-			sucursalChacras.getPromociones().add(promocionDiaEnamorados);
-
-			sucursalGodoyCruz.getCategorias().add(categoria1);
-			sucursalGodoyCruz.getCategorias().add(categoria2);
+//			sucursalChacras.getCategorias().add(categoria1);
+//			sucursalChacras.getCategorias().add(categoria2);
+//			sucursalChacras.getPromociones().add(promocionDiaEnamorados);
+//
+//			sucursalGodoyCruz.getCategorias().add(categoria1);
+//			sucursalGodoyCruz.getCategorias().add(categoria2);
 
 			sucursalRepository.save(sucursalChacras);
 			sucursalRepository.save(sucursalGodoyCruz);
@@ -416,6 +416,7 @@ public class DashboardApplication {
 			logger.info("----------------Sucursal Godoy Cruz ---------------------");
 			logger.info("{}",sucursalGodoyCruz);
 			logger.info("----------------Pedido ---------------------");
+//			logger.info("{}",pedido);
 
 
 		};

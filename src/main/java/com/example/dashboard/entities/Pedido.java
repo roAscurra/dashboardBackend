@@ -38,7 +38,7 @@ public class Pedido extends Base{
     @JoinColumn(name="domicilio_id")
     private Domicilio domicilio;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name="sucursal_id")
     private Sucursal sucursal;
 
@@ -49,7 +49,7 @@ public class Pedido extends Base{
     @OneToOne
     private Factura factura;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private List<DetallePedido> detallePedidos ;
 //nullable false
 }
