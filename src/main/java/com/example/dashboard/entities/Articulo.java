@@ -24,6 +24,9 @@ public class Articulo extends Base {
     @JoinColumn(name = "articuloInsumo_id")
     private ArticuloInsumo articuloInsumo;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "articuloManufacturado_id")
+    private ArticuloInsumo articuloManufacturado;
 //FIJARSE LAS FLECHAS DE ARTICULOMANUFACTURADO Y ARTICULOINSUMO QUE VAN A ARTICULO
 
     @OneToMany(mappedBy = "articulo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

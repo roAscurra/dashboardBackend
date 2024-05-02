@@ -23,8 +23,7 @@ public class ArticuloInsumo extends Articulo{
     @Column(name = "esParaElaborar")
     private Boolean esParaElaborar;
 
-    @OneToMany(mappedBy = "articuloInsumo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Articulo> articulos;
+
 
     @OneToMany(mappedBy = "articuloInsumo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ArticuloManufacturadoDetalle> articuloManufacturadoDetalles;
