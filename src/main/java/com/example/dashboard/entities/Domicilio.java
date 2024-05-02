@@ -25,7 +25,7 @@ public class Domicilio extends Base{
     @Column(name = "nroDpto")
     private Integer nroDpto;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name="localidad_id")
     private Localidad localidad;
 
