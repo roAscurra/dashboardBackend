@@ -34,7 +34,7 @@ public class Pedido extends Base{
     @Column(name = "TipoEnvio")
     private TipoEnvio tipoEnvio;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name="domicilio_id")
     private Domicilio domicilio;
 
@@ -42,7 +42,7 @@ public class Pedido extends Base{
     @JoinColumn(name="sucursal_id")
     private Sucursal sucursal;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name="cliente_id")
     private Cliente cliente;
 
