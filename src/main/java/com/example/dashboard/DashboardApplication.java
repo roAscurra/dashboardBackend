@@ -230,11 +230,15 @@ public class DashboardApplication {
 
 
 			// Crear Insumos , coca cola , harina , etc
-			ArticuloInsumo cocaCola = ArticuloInsumo.builder().denominacion("Coca cola").unidadMedida(unidadMedidaLitros).esParaElaborar(false).stockActual(5).stockMaximo(50).precioCompra(50.0).precioVenta(70.0).build();
-			ArticuloInsumo harina = ArticuloInsumo.builder().denominacion("Harina").unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(4).stockMaximo(40).precioCompra(40.0).precioVenta(60.5).build();
-			ArticuloInsumo queso = ArticuloInsumo.builder().denominacion("Queso").unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
-			ArticuloInsumo tomate = ArticuloInsumo.builder().denominacion("Tomate").unidadMedida(unidadMedidaCantidad).esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
-
+			ArticuloInsumo cocaCola = ArticuloInsumo.builder().denominacion("Coca cola").esParaElaborar(false).stockActual(5).stockMaximo(50).precioCompra(50.0).precioVenta(70.0).build();
+			ArticuloInsumo harina = ArticuloInsumo.builder().denominacion("Harina").esParaElaborar(true).stockActual(4).stockMaximo(40).precioCompra(40.0).precioVenta(60.5).build();
+			ArticuloInsumo queso = ArticuloInsumo.builder().denominacion("Queso").esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
+			ArticuloInsumo tomate = ArticuloInsumo.builder().denominacion("Tomate").esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
+			articuloInsumoRepository.save(cocaCola);
+			articuloInsumoRepository.save(harina);
+			articuloInsumoRepository.save(queso);
+			articuloInsumoRepository.save(tomate);
+			tomate.setUnidadMedida(unidadMedidaLitros); //REVISAR HERENCIAAA
 			// crear fotos para cada insumo
 			Imagen imagenCoca = Imagen.builder().denominacion("https://m.media-amazon.com/images/I/51v8nyxSOYL._SL1500_.jpg").build();
 			Imagen imagenHarina = Imagen.builder().denominacion("https://mandolina.co/wp-content/uploads/2023/03/648366622-1024x683.jpg").build();
@@ -405,7 +409,8 @@ public class DashboardApplication {
 			logger.info("{}",articuloManufacturado);
 
 			ArticuloManufacturadoDetalle articuloManufacturadoDetalle = ArticuloManufacturadoDetalle.builder()
-					.cantidad(2).build();
+					.cantidad(2)
+					.build();
 			articuloManufacturadoDetalleRepository.save(articuloManufacturadoDetalle);
 
 			logger.info("---------------- Articulo Manufacturado Detalle: articulo manufacturado detalle ---------------------");
