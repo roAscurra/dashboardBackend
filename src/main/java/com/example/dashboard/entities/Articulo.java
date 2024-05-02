@@ -39,7 +39,7 @@ public class Articulo extends Base {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "unidadMedida_id")
     private UnidadMedida unidadMedida;
 

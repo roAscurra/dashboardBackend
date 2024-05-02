@@ -16,6 +16,6 @@ public class UnidadMedida extends Base {
     @Column
     private String denominacion;
 
-    @OneToMany(mappedBy = "unidadMedida", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "unidadMedida", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private List<Articulo> articulos;
 }

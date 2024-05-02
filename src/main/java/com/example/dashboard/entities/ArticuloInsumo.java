@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,5 +27,6 @@ public class ArticuloInsumo extends Articulo{
 
 
     @OneToMany(mappedBy = "articuloInsumo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ArticuloManufacturadoDetalle> articuloManufacturadoDetalles;
+    @Builder.Default
+    private List<ArticuloManufacturadoDetalle> articuloManufacturadoDetalles = new ArrayList<>();
 }

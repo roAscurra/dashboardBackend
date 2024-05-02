@@ -39,10 +39,11 @@ public class DashboardApplication {
 	private PromocionRepository promocionRepository;
 
 	@Autowired
-	private ImagenPromocionRepository imagenPromocionRepository;
+	private ArticuloRepository articuloRepository;
 
 	@Autowired
-	private ArticuloRepository articuloRepository;
+	private ImagenPromocionRepository imagenPromocionRepository;
+
 
 	@Autowired
 	private ArticuloInsumoRepository articuloInsumoRepository;
@@ -70,6 +71,7 @@ public class DashboardApplication {
 
 	@Autowired
 	private UnidadMedidaRepository unidadMedidaRepository;
+
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 
@@ -182,14 +184,6 @@ public class DashboardApplication {
 			empresaRepository.save(empresaBrown);
 
 			// Crear Unidades de medida
-			UnidadMedida unidadMedidaLitros = UnidadMedida.builder().denominacion("Litros").build();
-			UnidadMedida unidadMedidaGramos = UnidadMedida.builder().denominacion("Gramos").build();
-			UnidadMedida unidadMedidaCantidad = UnidadMedida.builder().denominacion("Cantidad").build();
-			UnidadMedida unidadMedidaPorciones = UnidadMedida.builder().denominacion("Porciones").build();
-			unidadMedidaRepository.save(unidadMedidaLitros);
-			unidadMedidaRepository.save(unidadMedidaGramos);
-			unidadMedidaRepository.save(unidadMedidaCantidad);
-			unidadMedidaRepository.save(unidadMedidaPorciones);
 			// Crear Unidades de medida
 			UnidadMedida unidadMedidaKilo = UnidadMedida.builder()
 					.denominacion("kilo")
@@ -212,80 +206,26 @@ public class DashboardApplication {
 			unidadMedidaRepository.save(unidadMedidaLitros);
 			unidadMedidaRepository.save(unidadMedidaPorcion);
 
-			//Craer Articulo
-
-			Articulo pizza = Articulo.builder()
-					.denominacion("Pizza")
-					.precioVenta(7000.00)
-					.build();
-
-			Articulo talca = Articulo.builder()
-					.denominacion("Pepsi")
-					.precioVenta(2700.00)
-					.build();
-
-			Articulo hamburguesa = Articulo.builder()
-					.denominacion("Hamburguesa")
-					.precioVenta(5500.00)
-					.build();
-
-			//Relacion Articulo-UnidadMedida
-			pizza.setUnidadMedida(unidadMedidaPorcion);
-			talca.setUnidadMedida(unidadMedidaLitros);
-			hamburguesa.setUnidadMedida(unidadMedidaKilo);
-
-			articuloRepository.save(pizza);
-			articuloRepository.save(talca);
-			articuloRepository.save(hamburguesa);
-
 			// Crear Categorías de productos y subCategorías de los mismos
-			Categoria categoria1 = Categoria.builder()
-					.denominacion("Pizzas")
-					.build();
-
-			Categoria categoria2 = Categoria.builder()
-					.denominacion("Bebidas")
-					.build();
-
-			categoria1.getArticulos().add(pizza);
-			categoria2.getArticulos().add(talca);
-			categoriaRepository.save(categoria1);
-			categoriaRepository.save(categoria2);
-
-			// Crear instancias de DetallePedido
-			DetallePedido detallePedido1 = DetallePedido.builder()
-					.cantidad(15)
-					.subTotal(500.0)
-					.build();
-
-			DetallePedido detallePedido2 = DetallePedido.builder()
-					.cantidad(20)
-					.subTotal(700.0)
-					.build();
-
-
-
-			detallePedidoRepository.save(detallePedido1);
-			detallePedidoRepository.save(detallePedido2);
-
-			categoria1.getSubCategoria().add(categoria2);
-			categoriaRepository.save(categoria1);
+//			Categoria categoriaBebidas = Categoria.builder().denominacion("Bebidas").build();
+//			categoriaRepository.save(categoriaBebidas);
+//			Categoria categoriaGaseosas = Categoria.builder().denominacion("Gaseosas").build();
+//			categoriaRepository.save(categoriaGaseosas);
+//			Categoria categoriaTragos = Categoria.builder().denominacion("Tragos").build();
+//			categoriaRepository.save(categoriaTragos);
+//			Categoria categoriaPizzas = Categoria.builder().denominacion("Pizzas").build();
+//			categoriaRepository.save(categoriaPizzas);
+//			categoriaBebidas.getSubCategoria().add(categoriaGaseosas);
+//			categoriaBebidas.getSubCategoria().add(categoriaTragos);
+//			categoriaRepository.save(categoriaBebidas);
 
 			// Crear Insumos , coca cola , harina , etc
 			ArticuloInsumo cocaCola = ArticuloInsumo.builder().denominacion("Coca cola").unidadMedida(unidadMedidaLitros).esParaElaborar(false).stockActual(5).stockMaximo(50).precioCompra(50.0).precioVenta(70.0).build();
 			ArticuloInsumo harina = ArticuloInsumo.builder().denominacion("Harina").unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(4).stockMaximo(40).precioCompra(40.0).precioVenta(60.5).build();
 			ArticuloInsumo queso = ArticuloInsumo.builder().denominacion("Queso").unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
-			ArticuloInsumo tomate = ArticuloInsumo.builder().denominacion("Tomate").unidadMedida(unidadMedidaCantidad).esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
+			ArticuloInsumo tomate = ArticuloInsumo.builder().denominacion("Tomate").unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
 
-
-
-
-			articuloInsumoRepository.save(cocaCola);
-			articuloInsumoRepository.save(harina);
-			articuloInsumoRepository.save(queso);
-			articuloInsumoRepository.save(tomate);
-
-			// creando fotos
+			// crear fotos para cada insumo
 			ImagenPromocion imagenCoca = ImagenPromocion.builder().denominacion("https://m.media-amazon.com/images/I/51v8nyxSOYL._SL1500_.jpg").build();
 			ImagenPromocion imagenHarina = ImagenPromocion.builder().denominacion("https://mandolina.co/wp-content/uploads/2023/03/648366622-1024x683.jpg").build();
 			ImagenPromocion imagenQueso = ImagenPromocion.builder().denominacion("https://superdepaso.com.ar/wp-content/uploads/2021/06/SANTAROSA-PATEGRAS-04.jpg").build();
@@ -295,8 +235,6 @@ public class DashboardApplication {
 			imagenPromocionRepository.save(imagenQueso);
 			imagenPromocionRepository.save(imagenTomate);
 
-
-			//Creando Insumo
 			cocaCola.getImagenPromociones().add(imagenCoca);
 			harina.getImagenPromociones().add(imagenHarina);
 			queso.getImagenPromociones().add(imagenQueso);
@@ -306,12 +244,20 @@ public class DashboardApplication {
 			articuloInsumoRepository.save(queso);
 			articuloInsumoRepository.save(tomate);
 
-
 			// Crear Articulos Manufacturados
 			ArticuloManufacturado pizzaMuzarella = ArticuloManufacturado.builder().denominacion("Pizza Muzarella").descripcion("Una pizza clasica").unidadMedida(unidadMedidaPorcion).precioVenta(130.0).tiempoEstimadoMinutos(15).preparacion("Pasos de preparacion de una muzza de toda la vida").build();
-			ArticuloManufacturado pizzaNapolitana = ArticuloManufacturado.builder().denominacion("Pizza Napolitana").descripcion("Una pizza clasica").unidadMedida(unidadMedidaPorcion).precioVenta(150.0).tiempoEstimadoMinutos(15).preparacion("Pasos de preparacion de una pizza napolitana italiana").build();
+			ArticuloManufacturado pizzaNapolitana = ArticuloManufacturado.builder().denominacion("Pizza Muzarella").descripcion("Una pizza clasica").unidadMedida(unidadMedidaPorcion).precioVenta(150.0).tiempoEstimadoMinutos(15).preparacion("Pasos de preparacion de una pizza napolitana italiana").build();
 
+			// Crear fotos para los artículos manufacturados
+			ImagenPromocion imagenPizzaMuzarella = ImagenPromocion.builder().denominacion("https://storage.googleapis.com/fitia-api-bucket/media/images/recipe_images/1002846.jpg").build();
+			ImagenPromocion imagenPizzaNapolitana = ImagenPromocion.builder().denominacion("https://assets.elgourmet.com/wp-content/uploads/2023/03/8metlvp345_portada-pizza-1024x686.jpg.webp").build();
+			imagenPromocionRepository.save(imagenPizzaMuzarella);
+			imagenPromocionRepository.save(imagenPizzaNapolitana);
 
+			pizzaMuzarella.getImagenPromociones().add(imagenPizzaMuzarella);
+			pizzaNapolitana.getImagenPromociones().add(imagenPizzaNapolitana);
+			articuloManufacturadoRepository.save(pizzaMuzarella);
+			articuloManufacturadoRepository.save(pizzaNapolitana);
 
 			// Establecer las relaciones entre estos objetos.
 			ArticuloManufacturadoDetalle detalle1 = ArticuloManufacturadoDetalle.builder().articuloInsumo(harina).cantidad(300).build();
@@ -325,31 +271,15 @@ public class DashboardApplication {
 			pizzaNapolitana.getArticuloManufacturadoDetalles().add(detalle3);
 			pizzaNapolitana.getArticuloManufacturadoDetalles().add(detalle4);
 			pizzaNapolitana.getArticuloManufacturadoDetalles().add(detalle5);
-
-
-			articuloManufacturadoDetalleRepository.save(detalle1);
-			articuloManufacturadoDetalleRepository.save(detalle2);
-			articuloManufacturadoDetalleRepository.save(detalle3);
-			articuloManufacturadoDetalleRepository.save(detalle4);
-			articuloManufacturadoDetalleRepository.save(detalle5);
-
-
-
-
-			// Crear fotos para los artículos manufacturados
-			ImagenPromocion imagenPizzaMuzarella = ImagenPromocion.builder().denominacion("https://storage.googleapis.com/fitia-api-bucket/media/images/recipe_images/1002846.jpg").build();
-			ImagenPromocion imagenPizzaNapolitana = ImagenPromocion.builder().denominacion("https://assets.elgourmet.com/wp-content/uploads/2023/03/8metlvp345_portada-pizza-1024x686.jpg.webp").build();
-
-
-
-			imagenPromocionRepository.save(imagenPizzaMuzarella);
-			imagenPromocionRepository.save(imagenPizzaNapolitana);
-
-			pizzaMuzarella.getImagenPromociones().add(imagenPizzaMuzarella);
-			pizzaNapolitana.getImagenPromociones().add(imagenPizzaNapolitana);
 			articuloManufacturadoRepository.save(pizzaMuzarella);
 			articuloManufacturadoRepository.save(pizzaNapolitana);
 
+			// Establecer relaciones de las categorias
+//			categoriaGaseosas.getArticulos().add(cocaCola);
+//			categoriaPizzas.getArticulos().add(pizzaMuzarella);
+//			categoriaPizzas.getArticulos().add(pizzaNapolitana);
+//			categoriaRepository.save(categoriaGaseosas);
+//			categoriaRepository.save(categoriaPizzas);
 
 			// Crear promocion para sucursal - Dia de los enamorados
 			// Tener en cuenta que esa promocion es exclusivamente para una sucursal determinada d euna empresa determinada
@@ -362,83 +292,57 @@ public class DashboardApplication {
 					.precioPromocional(100.0)
 					.tipoPromocion(TipoPromocion.promocion)
 					.build();
-
-			promocionDiaEnamorados.getArticulos().add(pizza);
-			promocionDiaEnamorados.getArticulos().add(talca);
 			promocionDiaEnamorados.getArticulos().add(cocaCola);
 			promocionDiaEnamorados.getArticulos().add(pizzaNapolitana);
 			promocionRepository.save(promocionDiaEnamorados);
 
-			imagenPizzaMuzarella.setPromocion(promocionDiaEnamorados);
-			imagenPizzaNapolitana.setPromocion(promocionDiaEnamorados);
-			imagenPromocionRepository.save(imagenPizzaMuzarella);
-			imagenPromocionRepository.save(imagenPizzaNapolitana);
-
-
-			//Crear Factura
-
-			Factura factura1 = Factura.builder()
-					.fechaFacturacion(LocalDate.of(2024,1,10))
-					.mpPaymentId(1)
-					.mpMerchantOrderId(1)
-					.mpPreferenceId("1")
-					.mpPaymentType("1")
-					.formaPago(FormaPago.MercadoPago)
-					.totalVenta(10.0)
-					.build();
-
-			facturaRepository.save(factura1);
-
-
-			//Crear Pedido
-
-			Pedido pedido1 = Pedido.builder()
-					.horaEstimadaFinalizacion(LocalTime.of(15, 30))
-					.total(22500.00)
-					.totalCosto(35000.00)
-					.estado(Estado.entregado)
-					.tipoEnvio(TipoEnvio.TakeAway)
-					.formaPago(FormaPago.MercadoPago)
-					.FechaPedido(LocalDate.of(2024,1,10))
-					.build();
-
-			pedido1.setDomicilio(domicilioGodoyCruz);
-			pedido1.setSucursal(sucursalGodoyCruz);
-			pedido1.setFactura(factura1);
-			pedido1.getDetallePedidos().add(detallePedido1);
-
-			pedidoRepository.save(pedido1);
-
 			//Agregar categorias y promociones a sucursales
-//			sucursalChacras.getCategorias().add(categoria1);
-//			sucursalChacras.getCategorias().add(categoria2);
+//			sucursalChacras.getCategorias().add(categoriaBebidas);
+//			sucursalChacras.getCategorias().add(categoriaPizzas);
 			sucursalChacras.getPromociones().add(promocionDiaEnamorados);
-//
-//			sucursalGodoyCruz.getCategorias().add(categoria1);
-//			sucursalGodoyCruz.getCategorias().add(categoria2);
+
+//			sucursalGodoyCruz.getCategorias().add(categoriaBebidas);
+//			sucursalGodoyCruz.getCategorias().add(categoriaPizzas);
 
 			sucursalRepository.save(sucursalChacras);
 			sucursalRepository.save(sucursalGodoyCruz);
 
 			//Crea un cliente y un usuario
-			ImagenCliente imagenCliente = ImagenCliente.builder().denominacion("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr9cSuAFVgr3rFGMkYgMQ6GDXP1Hy-Cp0Ox9GysWr-gg&s").build();
+			ImagenCliente imagenCliente = ImagenCliente.builder().denominacion("https://hips.hearstapps.com/hmg-prod/images/la-la-land-final-1638446140.jpg").build();
 			imagenClienteRepository.save(imagenCliente);
-
-			Usuario usuario = Usuario.builder().auth0Id("auth0|abcdef1234567890").build();
+			Usuario usuario = Usuario.builder().username("sebastian").auth0Id("9565a49d-ecc1-4f4e-adea-6cdcb7edc4a3").build();
 			usuarioRepository.save(usuario);
-
-			Cliente cliente1 = Cliente.builder()
-					.nombre("pepito")
-					.apellido("perez")
-					.telefono("23462452")
-					.email("pepitoperez@gmail.com")
-					.fechaNacimiento(LocalDate.of(2001,10,8))
+			Cliente cliente = Cliente.builder().usuario(usuario)
 					.imagenCliente(imagenCliente)
-					.usuario(usuario)
+					.email("correoFalso@gmail.com")
+					.nombre("Sebastian")
+					.apellido("Wilder")
+					.telefono("2615920825")
 					.build();
+			cliente.getDomicilios().add(domicilioChacras);
+			clienteRepository.save(cliente);
 
-			cliente1.getDomicilios().add(domicilioCliente);
-			cliente1.getPedidos().add(pedido1);
+			//Crea un pedido para el cliente
+			Pedido pedido = Pedido.builder().FechaPedido(LocalDate.now())
+					.horaEstimadaFinalizacion(LocalTime.now())
+					.total(300.0)
+					.totalCosto(170.6)
+					.estado(Estado.preparacion)
+					.formaPago(FormaPago.MercadoPago)
+					.tipoEnvio(TipoEnvio.delivery)
+					.sucursal(sucursalChacras)
+					.domicilio(domicilioChacras).build();
+
+			DetallePedido detallePedido1 = DetallePedido.builder().articulo(pizzaMuzarella).cantidad(1).subTotal(200.0).build();
+			DetallePedido detallePedido2 = DetallePedido.builder().articulo(cocaCola).cantidad(2).subTotal(100.0).build();
+
+			pedido.getDetallePedidos().add(detallePedido1);
+			pedido.getDetallePedidos().add(detallePedido2);
+			pedidoRepository.save(pedido);
+
+			cliente.getPedidos().add(pedido);
+			clienteRepository.save(cliente);
+
 
 			logger.info("----------------Sucursal Chacras ---------------------");
 			logger.info("{}",sucursalChacras);
@@ -447,7 +351,7 @@ public class DashboardApplication {
 			logger.info("----------------Empresa sucursal ---------------------");
 			logger.info(sucursalChacras.getEmpresa().getNombre());
 			logger.info("----------------Pedido ---------------------");
-//			logger.info("{}",pedido);
+			logger.info("{}",pedido);
 
 
 		};

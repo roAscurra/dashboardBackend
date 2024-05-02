@@ -29,7 +29,7 @@ public class Categoria extends Base{
     @JoinColumn (name = "categoriaPadre")
     private Categoria categoriaPadre;
 
-    @OneToMany( mappedBy = "categoriaPadre",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Categoria> subCategoria;
+    @OneToMany( mappedBy = "categoriaPadre",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    private List<Categoria> subCategoria = new ArrayList<>();
 
 }

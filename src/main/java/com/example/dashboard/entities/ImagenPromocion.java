@@ -15,11 +15,11 @@ public class ImagenPromocion extends Base{
     private String denominacion;
 
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "promocion_id")
     private Promocion promocion;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "articulo_id")
     private Articulo articulo;
 }
