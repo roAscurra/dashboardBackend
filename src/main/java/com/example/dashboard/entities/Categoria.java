@@ -25,13 +25,11 @@ public class Categoria extends Base{
     @OneToMany(mappedBy = "categoria",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Articulo> articulos;
 
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("categoria")
-    private List<Categoria> subCategoria;
-
     @ManyToOne
-    @JoinColumn(name = "categoria_id")
-    @JsonIgnoreProperties("subCategoria")
-    private Categoria categoria;
+    @JoinColumn (name = "categoriaPadre")
+    private Categoria categoriaPadre;
+
+    @OneToMany( mappedBy = "categoriaPadre",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Categoria> subCategoria;
 
 }
