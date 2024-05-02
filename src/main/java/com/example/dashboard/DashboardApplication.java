@@ -1,6 +1,9 @@
 package com.example.dashboard;
 
 import com.example.dashboard.entities.*;
+import com.example.dashboard.entities.enums.Estado;
+import com.example.dashboard.entities.enums.FormaPago;
+import com.example.dashboard.entities.enums.TipoEnvio;
 import com.example.dashboard.entities.enums.TipoPromocion;
 import com.example.dashboard.repositories.*;
 import com.example.dashboard.entities.Empresa;
@@ -17,6 +20,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 
@@ -72,12 +76,22 @@ public class DashboardApplication {
 	@Autowired
 	private DetallePedidoRepository detallePedidoRepository;
 
+	@Autowired
+	private ArticuloManufacturadoRepository articuloManufacturadoRepository;
+
+	@Autowired
+	private ArticuloManufacturadoDetalleRepository articuloManufacturadoDetalleRepository;
+
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(DashboardApplication.class, args);
 	}
 
+
 	@Bean
-	CommandLineRunner init() {
+	CommandLineRunner init(PedidoRepository pedidoRepository,
+						   FacturaRepository facturaRepository) {
 
 		return args -> {
 			logger.info("----------------ESTOY----FUNCIONANDO---------------------");
@@ -178,20 +192,14 @@ public class DashboardApplication {
 //			Categoria categoria1 = Categoria.builder()
 //					.denominacion("Pizzas")
 //					.build();
-//
-//			Categoria categoria2 = Categoria.builder()
-//					.denominacion("Bebidas")
-//					.build();
-//
-//			categoriaRepository.save(categoria1);
-//			categoriaRepository.save(categoria2);
-//
-//			// Crear instancias de DetallePedido
+
+
+			// Crear instancias de DetallePedido
 //			DetallePedido detallePedido1 = DetallePedido.builder()
 //					.cantidad(15)
 //					.subTotal(500.0)
 //					.build();
-//
+
 //			DetallePedido detallePedido2 = DetallePedido.builder()
 //					.cantidad(20)
 //					.subTotal(700.0)
@@ -315,8 +323,72 @@ public class DashboardApplication {
 			logger.info("{}",sucursalGodoyCruz);
 			logger.info("----------------Empresa sucursal ---------------------");
 			logger.info(sucursalChacras.getEmpresa().getNombre());
-			logger.info("----------------Pedido ---------------------");
+//			logger.info("----------------Pedido ---------------------");
 //			logger.info("{}",pedido);
+
+
+			UnidadMedida unidadMedida = new UnidadMedida();
+			unidadMedida.setDenominacion("kg");
+			unidadMedida = unidadMedidaRepository.save(unidadMedida);
+
+			logger.info("----------------Unidad de medida: KG ---------------------");
+			logger.info("{}",unidadMedida);
+
+			Categoria categoria = new Categoria();
+			categoria.setDenominacion("Bebidas");
+			categoria = categoriaRepository.save(categoria);
+			logger.info("----------------Categoria: BEDIDAS ---------------------");
+			logger.info("{}",categoria);
+
+			Pedido pedido = new Pedido();
+			pedido.setHoraEstimadaFinalizacion(LocalDateTime.now().toLocalTime());
+			pedido.setTotal(200.400);
+			pedido.setTotalCosto(10.500);
+			pedido.setEstado(Estado.entregado);
+			pedido.setTipoEnvio(TipoEnvio.delivery);
+			pedido.setFormaPago(FormaPago.MercadoPago);
+			pedido.setFechaPedido(LocalDate.now());
+			pedido = pedidoRepository.save(pedido);
+
+
+			logger.info("----------------Pedido: pedido ---------------------");
+			logger.info("{}",pedido);
+
+			DetallePedido detallePedido = new DetallePedido();
+			detallePedido.setCantidad(100);
+			detallePedido.setSubTotal(250.50);
+			detallePedido.setPedido(pedido);
+			detallePedido = detallePedidoRepository.save(detallePedido);
+			logger.info("----------------Detalle pedido: 100, 250.50 ---------------------");
+			logger.info("{}",detallePedido);
+
+			Factura factura = new Factura();
+			factura.setFechaFacturacion(LocalDate.of(2024,1,10));
+			factura.setMpPaymentId(1);
+			factura.setMpMerchantOrderId(1);
+			factura.setMpPreferenceId("1");
+			factura.setMpPaymentType("1");
+			factura.setFormaPago(FormaPago.MercadoPago);
+			factura.setTotalVenta(10.00);
+			factura = facturaRepository.save(factura);
+			logger.info("---------------- Factura: factura ---------------------");
+			logger.info("{}",factura);
+
+			ArticuloManufacturado articuloManufacturado = new ArticuloManufacturado();
+			articuloManufacturado.setDescripcion("Pizza de pepperoni");
+			articuloManufacturado.setTiempoEstimadoMinutos(20);
+			articuloManufacturado.setPreparacion("1. Precalentar el horno a 180°C.\n2. Extender la masa de pizza sobre una bandeja.\n3. Agregar salsa de tomate, queso y pepperoni.\n4. Hornear durante 20 minutos o hasta que la masa esté dorada.");
+			articuloManufacturado = articuloManufacturadoRepository.save(articuloManufacturado);
+
+			logger.info("---------------- Articulo Manufacturado: articulo manufacturado ---------------------");
+			logger.info("{}",articuloManufacturado);
+
+			ArticuloManufacturadoDetalle articuloManufacturadoDetalle = new ArticuloManufacturadoDetalle();
+			articuloManufacturadoDetalle.setCantidad(2);
+			articuloManufacturadoDetalle = articuloManufacturadoDetalleRepository.save(articuloManufacturadoDetalle);
+
+			logger.info("---------------- Articulo Manufacturado Detalle: articulo manufacturado detalle ---------------------");
+			logger.info("{}",articuloManufacturadoDetalle);
 
 
 		};
