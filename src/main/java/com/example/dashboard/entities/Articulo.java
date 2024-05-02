@@ -27,7 +27,7 @@ public class Articulo extends Base {
 //FIJARSE LAS FLECHAS DE ARTICULOMANUFACTURADO Y ARTICULOINSUMO QUE VAN A ARTICULO
 
     @OneToMany(mappedBy = "articulo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ImagenPromocion> imagenPromociones;
+    private List<Imagen> imagen;
 
     @OneToMany(mappedBy = "articulo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<DetallePedido> detallePedidos;

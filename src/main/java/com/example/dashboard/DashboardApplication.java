@@ -35,7 +35,7 @@ public class DashboardApplication {
 	private PromocionRepository promocionRepository;
 
 	@Autowired
-	private ImagenPromocionRepository imagenPromocionRepository;
+	private ImagenRepository imagenRepository;
 
 	@Autowired
 	private ArticuloRepository articuloRepository;
@@ -57,9 +57,6 @@ public class DashboardApplication {
 
 	@Autowired
 	private PaisRepository paisRepository;
-
-	@Autowired
-	private ImagenClienteRepository imagenClienteRepository;
 
 	@Autowired
 	private ClienteRepository clienteRepository;
@@ -211,14 +208,14 @@ public class DashboardApplication {
 			ArticuloInsumo tomate = ArticuloInsumo.builder().denominacion("Tomate").unidadMedida(unidadMedidaCantidad).esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
 
 			// crear fotos para cada insumo
-			ImagenPromocion imagenCoca = ImagenPromocion.builder().denominacion("https://m.media-amazon.com/images/I/51v8nyxSOYL._SL1500_.jpg").build();
-			ImagenPromocion imagenHarina = ImagenPromocion.builder().denominacion("https://mandolina.co/wp-content/uploads/2023/03/648366622-1024x683.jpg").build();
-			ImagenPromocion imagenQueso = ImagenPromocion.builder().denominacion("https://superdepaso.com.ar/wp-content/uploads/2021/06/SANTAROSA-PATEGRAS-04.jpg").build();
-			ImagenPromocion imagenTomate = ImagenPromocion.builder().denominacion("https://thefoodtech.com/wp-content/uploads/2020/06/Componentes-de-calidad-en-el-tomate-828x548.jpg").build();
-			imagenPromocionRepository.save(imagenCoca);
-			imagenPromocionRepository.save(imagenHarina);
-			imagenPromocionRepository.save(imagenQueso);
-			imagenPromocionRepository.save(imagenTomate);
+			Imagen imagenCoca = Imagen.builder().denominacion("https://m.media-amazon.com/images/I/51v8nyxSOYL._SL1500_.jpg").build();
+			Imagen imagenHarina = Imagen.builder().denominacion("https://mandolina.co/wp-content/uploads/2023/03/648366622-1024x683.jpg").build();
+			Imagen imagenQueso = Imagen.builder().denominacion("https://superdepaso.com.ar/wp-content/uploads/2021/06/SANTAROSA-PATEGRAS-04.jpg").build();
+			Imagen imagenTomate = Imagen.builder().denominacion("https://thefoodtech.com/wp-content/uploads/2020/06/Componentes-de-calidad-en-el-tomate-828x548.jpg").build();
+			imagenRepository.save(imagenCoca);
+			imagenRepository.save(imagenHarina);
+			imagenRepository.save(imagenQueso);
+			imagenRepository.save(imagenTomate);
 
 //			cocaCola.getImagenPromociones().add(imagenCoca);
 //			harina.getImagenPromociones().add(imagenHarina);
@@ -234,10 +231,10 @@ public class DashboardApplication {
 //			ArticuloManufacturado pizzaNapolitana = ArticuloManufacturado.builder().denominacion("Pizza Muzarella").descripcion("Una pizza clasica").unidadMedida(unidadMedidaPorciones).precioVenta(150.0).tiempoEstimadoMinutos(15).preparacion("Pasos de preparacion de una pizza napolitana italiana").build();
 
 			// Crear fotos para los artículos manufacturados
-			ImagenPromocion imagenPizzaMuzarella = ImagenPromocion.builder().denominacion("https://storage.googleapis.com/fitia-api-bucket/media/images/recipe_images/1002846.jpg").build();
-			ImagenPromocion imagenPizzaNapolitana = ImagenPromocion.builder().denominacion("https://assets.elgourmet.com/wp-content/uploads/2023/03/8metlvp345_portada-pizza-1024x686.jpg.webp").build();
-			imagenPromocionRepository.save(imagenPizzaMuzarella);
-			imagenPromocionRepository.save(imagenPizzaNapolitana);
+			Imagen imagenPizzaMuzarella = Imagen.builder().denominacion("https://storage.googleapis.com/fitia-api-bucket/media/images/recipe_images/1002846.jpg").build();
+			Imagen imagenPizzaNapolitana = Imagen.builder().denominacion("https://assets.elgourmet.com/wp-content/uploads/2023/03/8metlvp345_portada-pizza-1024x686.jpg.webp").build();
+			imagenRepository.save(imagenPizzaMuzarella);
+			imagenRepository.save(imagenPizzaNapolitana);
 //
 //			pizzaMuzarella.getImagenPromociones().add(imagenPizzaMuzarella);
 //			pizzaNapolitana.getImagenPromociones().add(imagenPizzaNapolitana);
@@ -277,8 +274,8 @@ public class DashboardApplication {
 
 			imagenPizzaMuzarella.setPromocion(promocionDiaEnamorados);
 			imagenPizzaNapolitana.setPromocion(promocionDiaEnamorados);
-			imagenPromocionRepository.save(imagenPizzaMuzarella);
-			imagenPromocionRepository.save(imagenPizzaNapolitana);
+			imagenRepository.save(imagenPizzaMuzarella);
+			imagenRepository.save(imagenPizzaNapolitana);
 			//Agregar categorias y promociones a sucursales
 //			sucursalChacras.getCategorias().add(categoria1);
 //			sucursalChacras.getCategorias().add(categoria2);
@@ -291,8 +288,8 @@ public class DashboardApplication {
 			sucursalRepository.save(sucursalGodoyCruz);
 
 			//Crea un cliente y un usuario
-			ImagenCliente imagenCliente = ImagenCliente.builder().denominacion("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr9cSuAFVgr3rFGMkYgMQ6GDXP1Hy-Cp0Ox9GysWr-gg&s").build();
-			imagenClienteRepository.save(imagenCliente);
+			Imagen imagenCliente = Imagen.builder().denominacion("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr9cSuAFVgr3rFGMkYgMQ6GDXP1Hy-Cp0Ox9GysWr-gg&s").build();
+			imagenRepository.save(imagenCliente);
 
 			Usuario usuario = Usuario.builder().auth0Id("auth0|abcdef1234567890").build();
 			usuarioRepository.save(usuario);
@@ -303,7 +300,7 @@ public class DashboardApplication {
 					.telefono("23462452")
 					.email("pepitoperez@gmail.com")
 					.fechaNacimiento(LocalDate.of(2001,10,8))
-					.imagenCliente(imagenCliente)
+					.imagen(imagenCliente)
 					.usuario(usuario)
 					.build();
 			cliente.getDomicilios().add(domicilioCliente);
