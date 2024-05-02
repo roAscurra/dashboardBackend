@@ -299,7 +299,7 @@ public class DashboardApplication {
 			Imagen imagenCliente = Imagen.builder().denominacion("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr9cSuAFVgr3rFGMkYgMQ6GDXP1Hy-Cp0Ox9GysWr-gg&s").build();
 			imagenRepository.save(imagenCliente);
 
-			Usuario usuario = Usuario.builder().auth0Id("auth0|abcdef1234567890").build();
+			Usuario usuario = Usuario.builder().username("pepito123").auth0Id("auth0|abcdef1234567890").build();
 			usuarioRepository.save(usuario);
 
 			Cliente cliente = Cliente.builder()
