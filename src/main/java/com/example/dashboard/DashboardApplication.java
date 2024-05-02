@@ -64,6 +64,12 @@ public class DashboardApplication {
 	@Autowired
 	private ClienteRepository clienteRepository;
 
+	@Autowired
+	private CategoriaRepository categoriaRepository;
+
+	@Autowired
+	private DetallePedido detallePedido;
+
 	public static void main(String[] args) {
 		SpringApplication.run(DashboardApplication.class, args);
 	}
@@ -78,7 +84,10 @@ public class DashboardApplication {
 						   PaisRepository paisRepository,
 						   UsuarioRepository usuarioRepository,
 						   ImagenClienteRepository imagenClienteRepository,
+						   DetallePedidoRepository detallePedidoRepository,
+						   CategoriaRepository categoriaRepository,
 						   ClienteRepository clienteRepository) {
+
 		return args -> {
 			logger.info("----------------ESTOY----FUNCIONANDO---------------------");
 
@@ -150,6 +159,33 @@ public class DashboardApplication {
 
 
 			// Crear Categorías de productos y subCategorías de los mismos
+			Categoria categoria1 = Categoria.builder()
+					.denominacion("Pizzas")
+					.build();
+
+			Categoria categoria2 = Categoria.builder()
+					.denominacion("Bebidas")
+					.build();
+
+			categoriaRepository.save(categoria1);
+			categoriaRepository.save(categoria2);
+
+			// Crear instancias de DetallePedido
+			DetallePedido detallePedido1 = DetallePedido.builder()
+					.cantidad(15)
+					.subTotal(500.0)
+					.build();
+
+			DetallePedido detallePedido2 = DetallePedido.builder()
+					.cantidad(20)
+					.subTotal(700.0)
+					.build();
+
+			detallePedidoRepository.save(detallePedido1);
+			detallePedidoRepository.save(detallePedido2);
+
+			categoria1.getSubCategoria().add(categoria2);
+			categoriaRepository.save(categoria1);
 
 
 			// Crear Insumos , coca cola , harina , etc
@@ -206,7 +242,6 @@ public class DashboardApplication {
 //			pizzaNapolitana.getArticuloManufacturadoDetalles().add(detalle5);
 
 
-			// Establecer relaciones de las categorias
 
 
 			// Crear promocion para sucursal - Dia de los enamorados
@@ -225,12 +260,12 @@ public class DashboardApplication {
 			promocionRepository.save(promocionDiaEnamorados);
 
 			//Agregar categorias y promociones a sucursales
-//			sucursalChacras.getCategorias().add(categoriaBebidas);
-//			sucursalChacras.getCategorias().add(categoriaPizzas);
+			sucursalChacras.getCategorias().add(categoria1);
+			sucursalChacras.getCategorias().add(categoria2);
 			sucursalChacras.getPromociones().add(promocionDiaEnamorados);
 
-//			sucursalGodoyCruz.getCategorias().add(categoriaBebidas);
-//			sucursalGodoyCruz.getCategorias().add(categoriaPizzas);
+			sucursalGodoyCruz.getCategorias().add(categoria1);
+			sucursalGodoyCruz.getCategorias().add(categoria2);
 
 			sucursalRepository.save(sucursalChacras);
 			sucursalRepository.save(sucursalGodoyCruz);
