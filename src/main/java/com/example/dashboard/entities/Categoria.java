@@ -33,4 +33,5 @@ public class Categoria extends Base{
     @JoinColumn(name = "categoria_id")
     @JsonIgnoreProperties("subCategoria")
     private Categoria categoria;
+
 }

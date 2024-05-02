@@ -3,16 +3,11 @@ package com.example.dashboard;
 import com.example.dashboard.entities.*;
 import com.example.dashboard.entities.enums.TipoPromocion;
 import com.example.dashboard.repositories.*;
-import com.example.dashboard.entities.Categoria;
-import com.example.dashboard.entities.DetallePedido;
 import com.example.dashboard.entities.Empresa;
 import com.example.dashboard.entities.Sucursal;
-import com.example.dashboard.repositories.CategoriaRepository;
-import com.example.dashboard.repositories.DetallePedidoRepository;
 import com.example.dashboard.repositories.EmpresaRepository;
 import com.example.dashboard.repositories.SucursalRepository;
 
-import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +18,6 @@ import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.List;
 
 
 @SpringBootApplication
@@ -46,33 +39,109 @@ public class DashboardApplication {
 
 	@Autowired
 	private ArticuloRepository articuloRepository;
+
 	@Autowired
 	private ArticuloInsumoRepository articuloInsumoRepository;
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
+	@Autowired
+	private DomicilioRepository domicilioRepository;
+
+	@Autowired
+	private LocalidadRepository localidadRepository;
+
+	@Autowired
+	private ProvinciaRepository provinciaRepository;
+
+	@Autowired
+	private PaisRepository paisRepository;
+
+	@Autowired
+	private ImagenClienteRepository imagenClienteRepository;
+
+	@Autowired
+	private ClienteRepository clienteRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(DashboardApplication.class, args);
 	}
 
 	@Bean
-	CommandLineRunner init(EmpresaRepository empresaRepository, SucursalRepository sucursalRepository, PromocionRepository promocionRepository) {
+	CommandLineRunner init(EmpresaRepository empresaRepository,
+						   SucursalRepository sucursalRepository,
+						   PromocionRepository promocionRepository,
+						   DomicilioRepository domicilioRepository,
+						   LocalidadRepository localidadRepository,
+						   ProvinciaRepository provinciaRepository,
+						   PaisRepository paisRepository,
+						   UsuarioRepository usuarioRepository,
+						   ImagenClienteRepository imagenClienteRepository,
+						   ClienteRepository clienteRepository) {
 		return args -> {
 			logger.info("----------------ESTOY----FUNCIONANDO---------------------");
-// Etapa del dashboard
-			// Crear 1 pais
-			// Crear 2 provincias para ese pais
-			// crear 2 localidades para cada provincia
+
+			//Crear instancia pais
+			Pais pais = Pais.builder().nombre("Argentina").build();
+
+			//Crear instancias provincias
+			Provincia provincia1 = Provincia.builder().nombre("Mendoza").pais(pais).build();
+			Provincia provincia2 = Provincia.builder().nombre("Cordoba").pais(pais).build();
+
+			//Crear instancias localidades
+			Localidad localidad1 = Localidad.builder().nombre("Guaymallen").provincia(provincia1).build();
+			Localidad localidad2 = Localidad.builder().nombre("Godoy Cruz").provincia(provincia1).build();
+			Localidad localidad3 = Localidad.builder().nombre("Lujan de Cuyo").provincia(provincia1).build();
+
+			paisRepository.save(pais);
+			provinciaRepository.save(provincia1);
+			provinciaRepository.save(provincia2);
+			localidadRepository.save(localidad1);
+			localidadRepository.save(localidad2);
+			localidadRepository.save(localidad3);
+
 
 			Empresa empresaBrown = Empresa.builder().nombre("Lo de Brown").cuil(30503167).razonSocial("Venta de Alimentos").build();
 			Sucursal sucursalChacras = Sucursal.builder().nombre("En chacras").horarioApertura(LocalTime.of(17,0)).horarioCierre(LocalTime.of(23,0)).build();
 			Sucursal sucursalGodoyCruz = Sucursal.builder().nombre("En godoy cruz").horarioApertura(LocalTime.of(16,0)).horarioCierre(LocalTime.of(23,30)).build();
 
+			//Crear instancias domicilio
+			Domicilio domicilioGodoyCruz = Domicilio.builder()
+					.calle("Av. San Martin")
+					.numero(1234)
+					.cp(5501)
+					.piso(5)
+					.nroDpto(2)
+					.localidad(localidad2)
+					.build();
 
+			Domicilio domicilioChacras = Domicilio.builder()
+					.calle("Mitre")
+					.numero(1634)
+					.cp(5505)
+					.piso(0)
+					.nroDpto(0)
+					.localidad(localidad3)
+					.build();
+
+			Domicilio domicilioCliente = Domicilio.builder()
+					.calle("comodoro rivadavia")
+					.numero(1470)
+					.cp(5519)
+					.piso(0)
+					.nroDpto(0)
+					.localidad(localidad1)
+					.build();
+
+			sucursalChacras.setDomicilio(domicilioChacras);
+			sucursalGodoyCruz.setDomicilio(domicilioGodoyCruz);
 			empresaBrown.getSucursales().add(sucursalChacras);
 			empresaBrown.getSucursales().add(sucursalGodoyCruz);
 
+			domicilioRepository.save(domicilioChacras);
+			domicilioRepository.save(domicilioGodoyCruz);
+			domicilioRepository.save(domicilioCliente);
 			sucursalRepository.save(sucursalChacras);
 			sucursalRepository.save(sucursalGodoyCruz);
 			empresaRepository.save(empresaBrown);
@@ -167,7 +236,23 @@ public class DashboardApplication {
 			sucursalRepository.save(sucursalGodoyCruz);
 
 			//Crea un cliente y un usuario
+			ImagenCliente imagenCliente = ImagenCliente.builder().denominacion("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr9cSuAFVgr3rFGMkYgMQ6GDXP1Hy-Cp0Ox9GysWr-gg&s").build();
+			imagenClienteRepository.save(imagenCliente);
 
+			Usuario usuario = Usuario.builder().auth0Id("auth0|abcdef1234567890").build();
+			usuarioRepository.save(usuario);
+
+			Cliente cliente = Cliente.builder()
+					.nombre("pepito")
+					.apellido("perez")
+					.telefono("23462452")
+					.email("pepitoperez@gmail.com")
+					.fechaNacimiento(LocalDate.of(2001,10,8))
+					.imagenCliente(imagenCliente)
+					.usuario(usuario)
+					.build();
+			cliente.getDomicilios().add(domicilioCliente);
+			clienteRepository.save(cliente);
 
 			logger.info("----------------Sucursal Chacras ---------------------");
 			logger.info("{}",sucursalChacras);
