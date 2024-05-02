@@ -6,9 +6,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -32,7 +30,7 @@ public class Cliente extends Base{
     private Usuario usuario;
 
     @OneToOne
-    private ImagenCliente imagenCliente;
+    private Imagen imagen;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Builder.Default //Builder no sobreescribe la inicializacion de la lista

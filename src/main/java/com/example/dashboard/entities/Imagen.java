@@ -10,10 +10,9 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class ImagenPromocion extends Base{
+public class Imagen extends Base{
     @Column(name = "denominacion")
     private String denominacion;
-
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "promocion_id")
