@@ -363,6 +363,19 @@ public class DashboardApplication {
 			logger.info("----------------Categoria: BEDIDAS ---------------------");
 			logger.info("{}",categoria);
 
+			Factura factura = Factura.builder()
+					.fechaFacturacion(LocalDate.of(2024,1,10))
+					.mpPaymentId(1)
+					.mpMerchantOrderId(1)
+					.mpPreferenceId("1")
+					.mpPaymentType("1")
+					.formaPago(FormaPago.MercadoPago)
+					.totalVenta(10.00).build();
+			facturaRepository.save(factura);
+
+			logger.info("---------------- Factura: factura ---------------------");
+			logger.info("{}",factura);
+
 			Pedido pedido = Pedido.builder()
 					.horaEstimadaFinalizacion(LocalDateTime.now().toLocalTime())
 					.total(200.400)
@@ -371,6 +384,10 @@ public class DashboardApplication {
 					.tipoEnvio(TipoEnvio.delivery)
 					.formaPago(FormaPago.MercadoPago)
 					.FechaPedido(LocalDate.now()).build();
+			pedido.setDomicilio(domicilioGodoyCruz);
+			pedido.setCliente(cliente);
+			pedido.setFactura(factura);
+			pedido.setSucursal(sucursalChacras);
 			pedidoRepository.save(pedido);
 
 			logger.info("----------------Pedido: pedido ---------------------");
@@ -385,18 +402,7 @@ public class DashboardApplication {
 			logger.info("----------------Detalle pedido: 100, 250.50 ---------------------");
 			logger.info("{}",detallePedido);
 
-			Factura factura = Factura.builder()
-					.fechaFacturacion(LocalDate.of(2024,1,10))
-					.mpPaymentId(1)
-					.mpMerchantOrderId(1)
-					.mpPreferenceId("1")
-					.mpPaymentType("1")
-					.formaPago(FormaPago.MercadoPago)
-					.totalVenta(10.00).build();
-			facturaRepository.save(factura);
 
-			logger.info("---------------- Factura: factura ---------------------");
-			logger.info("{}",factura);
 
 			ArticuloManufacturado articuloManufacturado = ArticuloManufacturado.builder()
 					.descripcion("Pizza de pepperoni")
@@ -411,6 +417,8 @@ public class DashboardApplication {
 			ArticuloManufacturadoDetalle articuloManufacturadoDetalle = ArticuloManufacturadoDetalle.builder()
 					.cantidad(2)
 					.build();
+			articuloManufacturadoDetalle.setArticuloInsumo(harina);
+			articuloManufacturadoDetalle.setArticuloManufacturado(articuloManufacturado);
 			articuloManufacturadoDetalleRepository.save(articuloManufacturadoDetalle);
 
 			logger.info("---------------- Articulo Manufacturado Detalle: articulo manufacturado detalle ---------------------");

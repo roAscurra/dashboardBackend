@@ -14,11 +14,11 @@ public class ArticuloManufacturadoDetalle  extends Base{
     @Column(name = "cantidad")
     private Integer cantidad;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name="articulo_insumo")
     private ArticuloInsumo articuloInsumo;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "articuloManufacturado_id")
     private ArticuloManufacturado articuloManufacturado;
 }
