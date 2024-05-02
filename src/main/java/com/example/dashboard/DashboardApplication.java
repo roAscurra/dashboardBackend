@@ -187,14 +187,25 @@ public class DashboardApplication {
 
 			// Crear Categorías de productos y subCategorías de los mismos
 			Categoria categoria1 = Categoria.builder()
-					.denominacion("Pizzas")
+					.denominacion("Sin categoria padre")
 					.build();
 			Categoria categoria2 = Categoria.builder()
+					.denominacion("Pizzas")
+					.build();
+			Categoria categoria3 = Categoria.builder()
+					.denominacion("Muzzarella")
+					.build();
+			Categoria categoria4 = Categoria.builder()
 					.denominacion("Sandwichs")
 					.build();
-
 			categoriaRepository.save(categoria1);
+			categoria2.setCategoriaPadre(categoria1);
 			categoriaRepository.save(categoria2);
+			categoria3.setCategoriaPadre(categoria2);
+			categoriaRepository.save(categoria3);
+			categoria4.setCategoriaPadre(categoria1);
+			categoriaRepository.save(categoria4);
+
 			sucursalChacras.getCategorias().add(categoria1);
 			sucursalChacras.getCategorias().add(categoria2);
 			sucursalGodoyCruz.getCategorias().add(categoria1);
@@ -294,6 +305,7 @@ public class DashboardApplication {
 			imagenPizzaNapolitana.setPromocion(promocionDiaEnamorados);
 			imagenRepository.save(imagenPizzaMuzarella);
 			imagenRepository.save(imagenPizzaNapolitana);
+
 			//Agregar categorias y promociones a sucursales
 //			sucursalChacras.getCategorias().add(categoria1);
 //			sucursalChacras.getCategorias().add(categoria2);
@@ -342,6 +354,7 @@ public class DashboardApplication {
 			logger.info("{}",unidadMedida);
 
 			Categoria categoria = Categoria.builder().denominacion("Bebidas").build();
+			categoria.setCategoriaPadre(categoria1);
 			categoria = categoriaRepository.save(categoria);
 			logger.info("----------------Categoria: BEDIDAS ---------------------");
 			logger.info("{}",categoria);
@@ -355,7 +368,6 @@ public class DashboardApplication {
 					.formaPago(FormaPago.MercadoPago)
 					.FechaPedido(LocalDate.now()).build();
 			pedidoRepository.save(pedido);
-
 
 			logger.info("----------------Pedido: pedido ---------------------");
 			logger.info("{}",pedido);
