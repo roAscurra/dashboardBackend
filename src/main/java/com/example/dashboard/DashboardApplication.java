@@ -220,24 +220,6 @@ public class DashboardApplication {
 			sucursalGodoyCruz.getCategorias().add(categoria1);
 			sucursalGodoyCruz.getCategorias().add(categoria2);
 
-			// Crear instancias de DetallePedido
-//			DetallePedido detallePedido1 = DetallePedido.builder()
-//					.cantidad(15)
-//					.subTotal(500.0)
-//					.build();
-
-//			DetallePedido detallePedido2 = DetallePedido.builder()
-//					.cantidad(20)
-//					.subTotal(700.0)
-//					.build();
-//
-//			detallePedidoRepository.save(detallePedido1);
-//			detallePedidoRepository.save(detallePedido2);
-//
-//			categoria1.getSubCategoria().add(categoria2);
-//			categoriaRepository.save(categoria1);
-
-
 			// Crear Insumos , coca cola , harina , etc
 			ArticuloInsumo cocaCola = ArticuloInsumo.insumoBuilder().denominacion("Coca cola").esParaElaborar(false).stockActual(5).unidadMedida(unidadMedidaLitros).stockMaximo(50).precioCompra(50.0).precioVenta(70.0).categoria(bebida).build();
 			ArticuloInsumo harina = ArticuloInsumo.insumoBuilder().denominacion("Harina").esParaElaborar(true).stockActual(4).unidadMedida(unidadMedidaGramos).stockMaximo(40).precioCompra(40.0).precioVenta(60.5).categoria(insumos).build();
@@ -266,11 +248,6 @@ public class DashboardApplication {
 			imagenQueso.setArticuloInsumo(queso);
 			imagenRepository.save(imagenQueso);
 
-//			cocaCola.getImagenPromociones().add(imagenCoca);
-//			harina.getImagenPromociones().add(imagenHarina);
-//			queso.getImagenPromociones().add(imagenQueso);
-//			tomate.getImagenPromociones().add(imagenTomate);
-//
 
 			// Crear Articulos Manufacturados
 			ArticuloManufacturado pizzaMuzarella = ArticuloManufacturado.manufacturadoBuilder().denominacion("Pizza Muzarella").descripcion("Una pizza clasica").unidadMedida(unidadMedidaPorciones).precioVenta(130.0).tiempoEstimadoMinutos(15).preparacion("Pasos de preparacion de una muzza de toda la vida").categoria(categoria2).build();
@@ -287,27 +264,6 @@ public class DashboardApplication {
 			imagenRepository.save(imagenPizzaMuzarella);
 			imagenPizzaNapolitana.setArticuloManufacturado(pizzaNapolitana);
 			imagenRepository.save(imagenPizzaNapolitana);
-//
-//			pizzaMuzarella.getImagenPromociones().add(imagenPizzaMuzarella);
-//			pizzaNapolitana.getImagenPromociones().add(imagenPizzaNapolitana);
-//			articuloManufacturadoRepository.save(pizzaMuzarella);
-//			articuloManufacturadoRepository.save(pizzaNapolitana);
-
-			// Establecer las relaciones entre estos objetos.
-//			ArticuloManufacturadoDetalle detalle1 = ArticuloManufacturadoDetalle.builder().articuloInsumo(harina).cantidad(300).build();
-//			ArticuloManufacturadoDetalle detalle2 = ArticuloManufacturadoDetalle.builder().articuloInsumo(queso).cantidad(600).build();
-//			ArticuloManufacturadoDetalle detalle3 = ArticuloManufacturadoDetalle.builder().articuloInsumo(harina).cantidad(350).build();
-//			ArticuloManufacturadoDetalle detalle4 = ArticuloManufacturadoDetalle.builder().articuloInsumo(queso).cantidad(650).build();
-//			ArticuloManufacturadoDetalle detalle5 = ArticuloManufacturadoDetalle.builder().articuloInsumo(tomate).cantidad(2).build();
-//
-//			pizzaMuzarella.getArticuloManufacturadoDetalles().add(detalle1);
-//			pizzaMuzarella.getArticuloManufacturadoDetalles().add(detalle2);
-//			pizzaNapolitana.getArticuloManufacturadoDetalles().add(detalle3);
-//			pizzaNapolitana.getArticuloManufacturadoDetalles().add(detalle4);
-//			pizzaNapolitana.getArticuloManufacturadoDetalles().add(detalle5);
-
-
-
 
 			// Crear promocion para sucursal - Dia de los enamorados
 			// Tener en cuenta que esa promocion es exclusivamente para una sucursal determinada d euna empresa determinada
@@ -326,12 +282,8 @@ public class DashboardApplication {
 
 
 			//Agregar categorias y promociones a sucursales
-//			sucursalChacras.getCategorias().add(categoria1);
-//			sucursalChacras.getCategorias().add(categoria2);
+
 			sucursalChacras.getPromociones().add(promocionDiaEnamorados);
-//
-//			sucursalGodoyCruz.getCategorias().add(categoria1);
-//			sucursalGodoyCruz.getCategorias().add(categoria2);
 
 			sucursalRepository.save(sucursalChacras);
 			sucursalRepository.save(sucursalGodoyCruz);
@@ -361,8 +313,7 @@ public class DashboardApplication {
 			logger.info("{}",sucursalGodoyCruz);
 			logger.info("----------------Empresa sucursal ---------------------");
 			logger.info(sucursalChacras.getEmpresa().getNombre());
-//			logger.info("----------------Pedido ---------------------");
-//			logger.info("{}",pedido);
+
 
 
 			UnidadMedida unidadMedida = UnidadMedida.builder()
@@ -404,7 +355,9 @@ public class DashboardApplication {
 			pedido.setFactura(factura);
 			pedido.setSucursal(sucursalChacras);
 			pedidoRepository.save(pedido);
+
 			factura.setPedido(pedido);
+			facturaRepository.save(factura);
 
 			logger.info("----------------Pedido: pedido ---------------------");
 			logger.info("{}",pedido);
