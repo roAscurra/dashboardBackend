@@ -4,15 +4,17 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
-public class ArticuloInsumo extends Articulo{
+@SuperBuilder(builderMethodName = "insumoBuilder")
+public class ArticuloInsumo extends Articulo {
 
     @Column(name = "precioCompra")
     private double precioCompra;
@@ -24,8 +26,17 @@ public class ArticuloInsumo extends Articulo{
     private Boolean esParaElaborar;
 
     @OneToMany(mappedBy = "articuloInsumo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Articulo> articulos;
+    private Set<ArticuloManufacturadoDetalle> articuloManufacturadoDetalles;
 
-    @OneToMany(mappedBy = "articuloInsumo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ArticuloManufacturadoDetalle> articuloManufacturadoDetalles;
+    @OneToMany(mappedBy = "articuloInsumo", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    private Set<Imagen> imagenes;
+
+    // Constructor
+    public ArticuloInsumo(String denominacion, Double precioVenta, UnidadMedida unidadMedida, Double precioCompra, Integer stockActual, Integer stockMaximo, Boolean esParaElaborar) {
+        super(denominacion, precioVenta, unidadMedida);
+        this.precioCompra = precioCompra;
+        this.stockActual = stockActual;
+        this.stockMaximo = stockMaximo;
+        this.esParaElaborar = esParaElaborar;
+    }
 }

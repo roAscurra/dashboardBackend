@@ -8,6 +8,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -35,13 +36,14 @@ public class Promocion extends Base{
     private TipoPromocion tipoPromocion;
 
 
-    @OneToMany(mappedBy = "promocion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Imagen> imagenes;
+//    @OneToMany(mappedBy = "promocion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Imagen> imagenes;
 
 
     @ManyToMany
     @JoinTable(name = "promocion_articulos",
             joinColumns = @JoinColumn(name = "articulo_id"),
             inverseJoinColumns = @JoinColumn(name = "promocion_id"))
-    private List<Articulo> articulos;
+    @Builder.Default
+    private List<Articulo> articulos = new ArrayList<>();
 }

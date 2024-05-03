@@ -33,6 +33,6 @@ public class Factura extends Base{
 
     
     @OneToOne
-    private Factura factura;
+    private Pedido pedido;
 
 }

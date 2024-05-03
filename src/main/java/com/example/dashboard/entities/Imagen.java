@@ -13,12 +13,16 @@ import lombok.experimental.SuperBuilder;
 public class Imagen extends Base{
     @Column(name = "denominacion")
     private String denominacion;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "promocion_id")
+//    private Promocion promocion;
+//
+    @ManyToOne
+    @JoinColumn(name = "articuloInsumo_id")
+    private ArticuloInsumo articuloInsumo;
 
     @ManyToOne
-    @JoinColumn(name = "promocion_id")
-    private Promocion promocion;
-
-    @ManyToOne
-    @JoinColumn(name = "articulo_id")
-    private Articulo articulo;
+    @JoinColumn(name = "articuloManufacturado_id")
+    private ArticuloManufacturado articuloManufacturado;
 }
