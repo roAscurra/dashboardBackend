@@ -404,7 +404,9 @@ public class DashboardApplication {
 			pedido.setFactura(factura);
 			pedido.setSucursal(sucursalChacras);
 			pedidoRepository.save(pedido);
+			
 			factura.setPedido(pedido);
+			facturaRepository.save(factura);
 
 			logger.info("----------------Pedido: pedido ---------------------");
 			logger.info("{}",pedido);
