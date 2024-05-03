@@ -36,7 +36,7 @@ public class Cliente extends Base{
     @Builder.Default //Builder no sobreescribe la inicializacion de la lista
     private List<Pedido> pedidos = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     //JoinTable crea una tabla intermedia
     @JoinTable  (name = "cliente_domicilio",
                 joinColumns = @JoinColumn(name = "cliente_id"),

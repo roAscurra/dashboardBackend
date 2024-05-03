@@ -46,10 +46,10 @@ public class Pedido extends Base{
     @JoinColumn(name="cliente_id")
     private Cliente cliente;
 
-    @OneToOne
+    @OneToOne(mappedBy = "pedido")
     private Factura factura;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<DetallePedido> detallePedidos ;
 //nullable false
 }
