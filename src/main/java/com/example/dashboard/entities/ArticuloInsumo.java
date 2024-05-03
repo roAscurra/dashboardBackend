@@ -28,7 +28,7 @@ public class ArticuloInsumo extends Articulo {
     @OneToMany(mappedBy = "articuloInsumo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ArticuloManufacturadoDetalle> articuloManufacturadoDetalles;
 
-    @OneToMany(mappedBy = "articuloInsumo", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "articuloInsumo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Imagen> imagenes;
 
     // Constructor

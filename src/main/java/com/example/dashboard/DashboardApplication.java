@@ -145,9 +145,10 @@ public class DashboardApplication {
 					.localidad(localidad1)
 					.build();
 			// Guarda los domicilios en la base de datos
-			domicilioRepository.save(domicilioChacras);
-			domicilioRepository.save(domicilioGodoyCruz);
-			domicilioRepository.save(domicilioCliente);
+//			domicilioRepository.save(domicilioChacras);
+//			domicilioRepository.save(domicilioGodoyCruz);
+//			domicilioRepository.save(domicilioCliente);
+// 			no hace falta guardar los domicilios porque se guarda cuando esta asociado a otro objeto
 
 			// Asigna los domicilios a las sucursales después de guardarlos
 			sucursalChacras.setDomicilio(domicilioChacras);
@@ -225,7 +226,7 @@ public class DashboardApplication {
 			ArticuloInsumo harina = ArticuloInsumo.insumoBuilder().denominacion("Harina").esParaElaborar(true).stockActual(4).unidadMedida(unidadMedidaGramos).stockMaximo(40).precioCompra(40.0).precioVenta(60.5).categoria(insumos).build();
 			ArticuloInsumo queso = ArticuloInsumo.insumoBuilder().denominacion("Queso").esParaElaborar(true).stockActual(20).unidadMedida(unidadMedidaGramos).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).categoria(insumos).build();
 			ArticuloInsumo tomate = ArticuloInsumo.insumoBuilder().denominacion("Tomate").esParaElaborar(true).stockActual(20).unidadMedida(unidadMedidaCantidad).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).categoria(insumos).build();
-			tomate.setUnidadMedida(unidadMedidaLitros); //REVISAR HERENCIAAA
+			tomate.setUnidadMedida(unidadMedidaLitros);
 			// crear fotos para cada insumo
 			Imagen imagenCoca = Imagen.builder().denominacion("https://m.media-amazon.com/images/I/51v8nyxSOYL._SL1500_.jpg").build();
 			Imagen imagenHarina = Imagen.builder().denominacion("https://mandolina.co/wp-content/uploads/2023/03/648366622-1024x683.jpg").build();
@@ -251,7 +252,7 @@ public class DashboardApplication {
 
 			// Crear Articulos Manufacturados
 			ArticuloManufacturado pizzaMuzarella = ArticuloManufacturado.manufacturadoBuilder().denominacion("Pizza Muzarella").descripcion("Una pizza clasica").unidadMedida(unidadMedidaPorciones).precioVenta(130.0).tiempoEstimadoMinutos(15).preparacion("Pasos de preparacion de una muzza de toda la vida").categoria(categoria2).build();
-			ArticuloManufacturado pizzaNapolitana = ArticuloManufacturado.manufacturadoBuilder().denominacion("Pizza Muzarella").descripcion("Una pizza clasica").unidadMedida(unidadMedidaPorciones).precioVenta(150.0).tiempoEstimadoMinutos(15).preparacion("Pasos de preparacion de una pizza napolitana italiana").categoria(categoria2).build();
+			ArticuloManufacturado pizzaNapolitana = ArticuloManufacturado.manufacturadoBuilder().denominacion("Pizza Napolitana").descripcion("Una pizza clasica napolitana").unidadMedida(unidadMedidaPorciones).precioVenta(150.0).tiempoEstimadoMinutos(15).preparacion("Pasos de preparacion de una pizza napolitana italiana").categoria(categoria2).build();
 			pizzaNapolitana.setArticuloInsumo(harina);
 			pizzaMuzarella.setArticuloInsumo(queso);
 			articuloManufacturadoRepository.save(pizzaMuzarella);
@@ -315,33 +316,6 @@ public class DashboardApplication {
 			logger.info(sucursalChacras.getEmpresa().getNombre());
 
 
-
-			UnidadMedida unidadMedida = UnidadMedida.builder()
-					.denominacion("kg").build();
-			unidadMedidaRepository.save(unidadMedida);
-
-			logger.info("----------------Unidad de medida: KG ---------------------");
-			logger.info("{}",unidadMedida);
-
-			Categoria categoria = Categoria.builder().denominacion("Bebidas").build();
-			categoria.setCategoriaPadre(categoria1);
-			categoria = categoriaRepository.save(categoria);
-			logger.info("----------------Categoria: BEDIDAS ---------------------");
-			logger.info("{}",categoria);
-
-			Factura factura = Factura.builder()
-					.fechaFacturacion(LocalDate.of(2024,1,10))
-					.mpPaymentId(1)
-					.mpMerchantOrderId(1)
-					.mpPreferenceId("1")
-					.mpPaymentType("1")
-					.formaPago(FormaPago.MercadoPago)
-					.totalVenta(10.00).build();
-			facturaRepository.save(factura);
-
-			logger.info("---------------- Factura: factura ---------------------");
-			logger.info("{}",factura);
-
 			Pedido pedido = Pedido.builder()
 					.horaEstimadaFinalizacion(LocalDateTime.now().toLocalTime())
 					.total(200.400)
@@ -352,12 +326,23 @@ public class DashboardApplication {
 					.FechaPedido(LocalDate.now()).build();
 			pedido.setDomicilio(domicilioGodoyCruz);
 			pedido.setCliente(cliente);
-			pedido.setFactura(factura);
 			pedido.setSucursal(sucursalChacras);
 			pedidoRepository.save(pedido);
 
+
+			Factura factura = Factura.builder()
+					.fechaFacturacion(LocalDate.of(2024,1,10))
+					.mpPaymentId(1)
+					.mpMerchantOrderId(1)
+					.mpPreferenceId("1")
+					.mpPaymentType("1")
+					.formaPago(FormaPago.MercadoPago)
+					.totalVenta(10.00).build();
 			factura.setPedido(pedido);
 			facturaRepository.save(factura);
+			logger.info("---------------- Factura: factura ---------------------");
+			logger.info("{}",factura);
+
 
 			logger.info("----------------Pedido: pedido ---------------------");
 			logger.info("{}",pedido);
@@ -378,7 +363,7 @@ public class DashboardApplication {
 			ArticuloManufacturado articuloManufacturado = ArticuloManufacturado.manufacturadoBuilder()
 					.denominacion("Pizza")
 					.precioVenta(10.0)
-					.unidadMedida(unidadMedida) // suponiendo que tengas una instancia de UnidadMedida
+					.unidadMedida(unidadMedidaPorciones) // suponiendo que tengas una instancia de UnidadMedida
 					.descripcion("Pizza de pepperoni")
 					.tiempoEstimadoMinutos(30)
 					.preparacion("Precalentar el horno, agregar los ingredientes y hornear durante 20 minutos.")
