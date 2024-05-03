@@ -329,6 +329,15 @@ public class DashboardApplication {
 			pedido.setSucursal(sucursalChacras);
 			pedidoRepository.save(pedido);
 
+			DetallePedido detallePedido = DetallePedido.builder()
+					.cantidad(100)
+					.articulo(pizzaNapolitana)
+					.subTotal(250.50)
+					.pedido(pedido).build();
+			detallePedidoRepository.save(detallePedido);
+
+			logger.info("----------------Detalle pedido: 100, 250.50 ---------------------");
+			logger.info("{}",detallePedido);
 
 			Factura factura = Factura.builder()
 					.fechaFacturacion(LocalDate.of(2024,1,10))
@@ -343,21 +352,8 @@ public class DashboardApplication {
 			logger.info("---------------- Factura: factura ---------------------");
 			logger.info("{}",factura);
 
-
 			logger.info("----------------Pedido: pedido ---------------------");
 			logger.info("{}",pedido);
-
-			DetallePedido detallePedido = DetallePedido.builder()
-					.cantidad(100)
-					.articulo(pizzaNapolitana)
-					.subTotal(250.50)
-					.pedido(pedido).build();
-			detallePedidoRepository.save(detallePedido);
-
-			logger.info("----------------Detalle pedido: 100, 250.50 ---------------------");
-			logger.info("{}",detallePedido);
-
-
 
 			// Crear una instancia de ArticuloManufacturado
 			ArticuloManufacturado articuloManufacturado = ArticuloManufacturado.manufacturadoBuilder()
@@ -399,8 +395,7 @@ public class DashboardApplication {
 
 			logger.info("---------------- Articulo Manufacturado Detalle: articulo manufacturado detalle ---------------------");
 			logger.info("{}",articuloManufacturadoDetallePizza);
-
-
+			
 		};
 	}
 }
